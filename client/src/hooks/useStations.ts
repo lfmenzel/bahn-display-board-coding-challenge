@@ -7,11 +7,11 @@ import { setSelectedStation, setStations } from "@/redux/board.ts";
 export const useStations = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-  const { query, limit } = useAppSelector((state) => state.board);
+  const { query } = useAppSelector((state) => state.board);
 
   useEffect(() => {
-    if (query != null && query != "" && limit != null) {
-      fetchStations(query, limit).then(({ data }) => {
+    if (query != null && query != "") {
+      fetchStations(query, "25").then(({ data }) => {
         setLoading(true);
         dispatch(setStations(data));
         setLoading(false);
@@ -20,7 +20,7 @@ export const useStations = () => {
       dispatch(setStations([]));
       dispatch(setSelectedStation(undefined));
     }
-  }, [query, limit]);
+  }, [query]);
 
   return {
     loading,
