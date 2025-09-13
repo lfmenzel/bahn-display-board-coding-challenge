@@ -6,6 +6,7 @@ import { Time } from "@/components/BoardCard/Time.tsx";
 import { TrainSign } from "@/components/BoardCard/TrainSign.tsx";
 import { Track } from "@/components/BoardCard/Track.tsx";
 import { Stops } from "@/components/BoardCard/Stops.tsx";
+import { Messages } from "@/components/BoardCard/Messages.tsx";
 
 export interface BoardCardProps {
   journeyId: string;
@@ -31,6 +32,8 @@ export const BoardCard: FC<BoardCardProps> = ({
   trackPlanned,
   trackCurrent,
   stops,
+  messagesImportant,
+  messages,
 }) => {
   const timeColor: string = timeCurrent
     ? timePlanned != timeCurrent
@@ -58,6 +61,8 @@ export const BoardCard: FC<BoardCardProps> = ({
         )}
       >
         <Stops target={target} stops={stops} />
+        <Messages messages={messagesImportant} important={true} />
+        <Messages messages={messages} important={false} />
       </div>
     </Card>
   );

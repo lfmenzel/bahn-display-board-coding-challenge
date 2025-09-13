@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { Switcher } from "@/components/App";
 import { useAppDispatch, useAppSelector } from "@/redux";
-import { queryStations, setLimit } from "@/redux/board.ts";
+import { queryStations, setLimit, setSelectedStation } from "@/redux/board.ts";
 import { Input } from "@/components/ui/input.tsx";
 
 export const SearchStationSM: FC = () => {
@@ -15,6 +15,7 @@ export const SearchStationSM: FC = () => {
 
   const handleStationChange = (e: { target: { value: string } }) => {
     dispatch(queryStations(e.target.value));
+    dispatch(setSelectedStation(undefined));
   };
 
   return (

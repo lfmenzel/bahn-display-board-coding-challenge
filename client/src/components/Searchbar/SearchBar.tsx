@@ -15,7 +15,9 @@ export const SearchBar: FC = () => {
   const language = useAppSelector((state) => state.app.language);
   const languages: string[] = ["de", "en"];
 
-  const { query, stations } = useAppSelector((state) => state.board);
+  const { query, stations, selectedStation } = useAppSelector(
+    (state) => state.board,
+  );
 
   return (
     <div>
@@ -40,7 +42,7 @@ export const SearchBar: FC = () => {
       </div>
       {/*TODO Show Result of useStation*/}
       <div className="text-foreground text-lg my-4">
-        {query && (
+        {query && !selectedStation && (
           <Button
             variant="ghost"
             onClick={() => dispatch(clearQuery())}
@@ -49,7 +51,7 @@ export const SearchBar: FC = () => {
             Clear search
           </Button>
         )}
-        {stations && (
+        {stations && !selectedStation && (
           <div>
             {stations.map((station: Station) => (
               <div
