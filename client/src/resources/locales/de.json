@@ -5,6 +5,16 @@
       "unit": "Min",
       "station.placeholder": "Bahnhof suchen"
     },
+    "stationPage": {
+      "arrivals": {
+        "header": "Ankünfte",
+        "empty": "Keine Ankünfte zu dieser Zeit"
+      },
+      "departures": {
+        "header": "Abfahrten",
+        "empty": "Keine Abfahrten zu dieser Zeit"
+      }
+    },
     "locale": "de-DE",
     "appTitle": "Bahn Board",
     "format": {

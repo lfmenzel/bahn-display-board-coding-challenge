@@ -5,6 +5,16 @@
       "unit": "Min",
       "station.placeholder": "Station search"
     },
+    "stationPage": {
+      "arrivals": {
+        "header": "Arrivals",
+        "empty": "No Arrivals at this time"
+      },
+      "departures": {
+        "header": "Departures",
+        "empty": "No Departures at this time"
+      }
+    },
     "locale": "en-US",
     "appTitle": "Bahn Board",
     "format": {

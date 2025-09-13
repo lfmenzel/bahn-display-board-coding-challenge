@@ -16,7 +16,6 @@ export const SearchBar: FC = () => {
   const languages: string[] = ["de", "en"];
 
   const { query, stations } = useAppSelector((state) => state.board);
-  const station = useAppSelector((state) => state.board.selectedStation);
 
   return (
     <div>
@@ -52,11 +51,6 @@ export const SearchBar: FC = () => {
         )}
         {stations && (
           <div>
-            {station && (
-              <div className="text-foreground text-2xl mt-4">
-                {station.name}
-              </div>
-            )}
             {stations.map((station: Station) => (
               <div
                 className="text-foreground text-xs"
