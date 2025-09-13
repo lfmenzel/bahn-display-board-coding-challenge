@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { fetchDepartures } from "@/api/connections.ts";
 import { setDepartures } from "@/redux/board.ts";
-import { formatTechnicalDateTime } from "@/components/App/helper.ts";
+import {
+  filterDates,
+  formatTechnicalDateTime,
+} from "@/components/App/helper.ts";
 import { useTranslation } from "react-i18next";
 
 export const useDepartures = () => {
@@ -11,18 +14,23 @@ export const useDepartures = () => {
 
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-  const station = useAppSelector((state) => state.board.selectedStation);
+  const { selectedStation, limit } = useAppSelector((state) => state.board);
 
   useEffect(() => {
-    if (station != null) {
+    if (selectedStation != null && selectedStation.extId != null) {
       const { date, time } = formatTechnicalDateTime(new Date(), t);
-      fetchDepartures(station.extId, date, time).then(({ data }) => {
+      fetchDepartures(selectedStation.extId, date, time).then(({ data }) => {
+        const connections = (data.entries || []).filter(
+          (entry: { zeit: string; ezZeit: string }) => {
+            return filterDates(entry.zeit, entry.ezZeit, limit);
+          },
+        );
         setLoading(true);
-        dispatch(setDepartures(data.entries || []));
+        dispatch(setDepartures(connections));
         setLoading(false);
       });
     }
-  }, [station]);
+  }, [selectedStation, limit]);
 
   return {
     loading,

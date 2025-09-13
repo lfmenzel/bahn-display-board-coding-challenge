@@ -29,7 +29,6 @@ export const boardSlice = createSlice({
       state.query = action.payload;
     },
     clearQuery: (state) => {
-      console.log("clearQuery");
       state.query = "";
       state.stations = [];
       state.selectedStation = undefined;

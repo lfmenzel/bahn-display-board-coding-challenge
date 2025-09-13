@@ -4,25 +4,33 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { fetchArrivals } from "@/api/connections.ts";
 import { setArrivals } from "@/redux/board.ts";
-import { formatTechnicalDateTime } from "@/components/App/helper.ts";
+import {
+  filterDates,
+  formatTechnicalDateTime,
+} from "@/components/App/helper.ts";
 
 export const useArrivals = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-  const station = useAppSelector((state) => state.board.selectedStation);
+  const { selectedStation, limit } = useAppSelector((state) => state.board);
 
   useEffect(() => {
-    const { date, time } = formatTechnicalDateTime(new Date(), t);
-    if (station != null) {
-      fetchArrivals(station.extId, date, time).then(({ data }) => {
+    if (selectedStation != null && selectedStation.extId != null) {
+      const { date, time } = formatTechnicalDateTime(new Date(), t);
+      fetchArrivals(selectedStation.extId, date, time).then(({ data }) => {
+        const connections = (data.entries || []).filter(
+          (entry: { zeit: string; ezZeit: string }) => {
+            return filterDates(entry.zeit, entry.ezZeit, limit);
+          },
+        );
         setLoading(true);
-        dispatch(setArrivals(data.entries || []));
+        dispatch(setArrivals(connections));
         setLoading(false);
       });
     }
-  }, [station]);
+  }, [selectedStation, limit]);
 
   return {
     loading,
