@@ -23,7 +23,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = ({
       variant="ghost"
       size="icon"
       className={cn(
-        "titlebar-button focus-visible:ring-0 bg-transparent hover:bg-transparent border-0 hover:brightness-150 hover:shadow-none hover:border-0 duration-500 ease-in-out transition-all",
+        "border border-input bg-background text-accent-foreground hover:bg-accent hover:text-accent-foreground shadow-md",
         className,
       )}
       onClick={() => {

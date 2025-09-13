@@ -6,6 +6,7 @@ import { useAppSelector } from "@/redux";
 import { Connection, Meldung } from "@/api/connections.ts";
 import { BoardCard } from "@/components/BoardCard";
 import { formatDate } from "@/components/App/helper.ts";
+import { Footer } from "@/components/App";
 
 export const BoardSM: FC = () => {
   const { t } = useTranslation();
@@ -16,13 +17,13 @@ export const BoardSM: FC = () => {
 
   return (
     selectedStation && (
-      <div className="overflow-y-auto overflow-x-hidden min-h-screen max-h-screen">
+      <div className="overflow-y-auto overflow-x-hidden min-h-screen max-h-screen pb-14">
         {selectedStation && (
-          <div className="text-foreground text-2xl my-4">
+          <div className="text-foreground text-3xl mt-4 mb-0 p-2 bg-muted-foreground/5 border-1 border-accent">
             {selectedStation.name}
           </div>
         )}
-        <div className="grid grid-flow-row gap-2 grid-cols-1 sm:grid-cols-2 w-full mt-4">
+        <div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 w-full mt-4">
           <Board
             label="departures"
             children={
@@ -87,6 +88,7 @@ export const BoardSM: FC = () => {
             }
           />
         </div>
+        <Footer />
       </div>
     )
   );

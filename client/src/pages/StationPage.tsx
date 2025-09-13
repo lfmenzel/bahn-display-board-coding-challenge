@@ -14,7 +14,6 @@ export const StationPage = () => {
     <div className="min-h-screen max-h-screen w-full h-full">
       <SearchBar />
       <BoardSM />
-      <Footer />
     </div>
   );
 };

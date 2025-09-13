@@ -14,7 +14,7 @@ export const Block: FC<BlockProps> = ({ children, key, header, className }) => {
   return (
     <div
       className={cn(
-        "border-1 border-accent p-4 bg-card h-full rounded-lg text-foreground break-inside-avoid",
+        "p-4 bg-card h-full rounded-lg text-foreground break-inside-avoid",
         className,
       )}
       key={key}
