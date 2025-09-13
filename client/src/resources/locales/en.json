@@ -1,0 +1,11 @@
+{
+  "translation": {
+    "locale": "en-US",
+    "appTitle": "Bahn Board",
+    "format": {
+      "dateTime": "yyyy/MM/dd p",
+      "date": "yyyy/MM/dd",
+      "time": "p"
+    }
+  }
+}

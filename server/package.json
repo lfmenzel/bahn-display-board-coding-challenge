@@ -1,6 +1,6 @@
 {
-  "name": "bahn-board",
-  "version": "0.0.1",
+  "name": "bahn-board-server",
+  "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
