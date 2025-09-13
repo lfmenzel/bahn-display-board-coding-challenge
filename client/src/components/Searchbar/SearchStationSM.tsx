@@ -14,6 +14,7 @@ import {
   SearchAndSelect,
 } from "@/components/Searchbar/SearchAndSelect.tsx";
 import { setOptionsForStation } from "@/components/App/helper.ts";
+import { Station } from "@/api/stations.ts";
 
 export const SearchStationSM: FC = () => {
   const { t } = useTranslation();
@@ -27,7 +28,11 @@ export const SearchStationSM: FC = () => {
 
   useEffect(() => {
     if (stations?.length > 0) {
-      setOptions(stations.map((station) => setOptionsForStation(station)));
+      setOptions(
+        stations
+          .filter((station: Station) => station.extId != undefined)
+          .map((station) => setOptionsForStation(station)),
+      );
     }
   }, [stations]);
 

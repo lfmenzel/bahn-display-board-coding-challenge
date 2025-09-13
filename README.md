@@ -14,3 +14,9 @@ Inclues Client and StoryBook.
 
 `cd client`
 
+# Known Issues:
+- There are Stations without extIds (atm I filter them out)
+- Search and Select is not perfect if Station is selected
+- There are probable more Vehicle Types
+- No Tests
+- Quality of Response is not always good
