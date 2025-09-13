@@ -15,7 +15,7 @@ export const SearchBar: FC = () => {
 
   return (
     <div>
-      <div className="flex flex-row w-full gap-1 sticky top-0 z-10">
+      <div className="flex flex-row w-full gap-1 sticky top-0 z-10 pb-4">
         <SearchStationSM />
 
         <Switcher

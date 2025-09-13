@@ -17,7 +17,7 @@ export const BoardSM: FC = () => {
 
   return (
     selectedStation && (
-      <div className="overflow-y-auto overflow-x-hidden min-h-screen max-h-screen pb-14">
+      <div className="overflow-y-auto overflow-x-hidden min-h-screen max-h-screen pb-18">
         {selectedStation && (
           <div className="text-foreground text-3xl mt-4 mb-0 p-2 bg-muted-foreground/5 border-1 border-accent">
             {selectedStation.name}
