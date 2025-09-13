@@ -11,7 +11,7 @@ export const useArrivals = () => {
 
   useEffect(() => {
     if (station != null) {
-      fetchArrivals(station.extId, "2025-09-12", "15:15:58").then(
+      fetchArrivals(station.extId, "2025-09-13", "10:15:58").then(
         ({ data }) => {
           setLoading(true);
           dispatch(setArrivals(data.entries || []));
