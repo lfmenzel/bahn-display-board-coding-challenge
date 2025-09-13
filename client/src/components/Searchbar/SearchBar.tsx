@@ -3,6 +3,7 @@ import { type FC } from "react";
 import { LanguageSwitcher, ThemeSwitcher } from "@/components/App";
 import { setLanguage, setThemeMode } from "@/redux/app.ts";
 import { useAppDispatch, useAppSelector } from "@/redux";
+import { SearchStationSM } from "@/components/Searchbar/SearchStationSM.tsx";
 
 export const SearchBar: FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ export const SearchBar: FC = () => {
   return (
     <div>
       <div className="flex flex-row w-full gap-1 sticky top-0">
-        <div className="text-foreground grow">Search Station</div>
+        <SearchStationSM />
 
         <LanguageSwitcher
           language={language}

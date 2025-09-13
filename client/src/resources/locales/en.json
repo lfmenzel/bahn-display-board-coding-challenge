@@ -1,5 +1,9 @@
 {
   "translation": {
+    "search": {
+      "limit": "in",
+      "unit": "Min"
+    },
     "locale": "en-US",
     "appTitle": "Bahn Board",
     "format": {

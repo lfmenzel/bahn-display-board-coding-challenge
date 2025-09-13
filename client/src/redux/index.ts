@@ -15,17 +15,19 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 import appReduceer from "./app";
+import boardReduceer from "./board";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
   app: appReduceer,
+  board: boardReduceer,
 });
 
-const whitelist: string[] = ["app"];
+const whitelist: string[] = ["app", "board"];
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {
-  key: "bahnBoard",
+  key: "bahn",
   storage,
   whitelist,
 };
