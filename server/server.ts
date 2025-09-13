@@ -33,7 +33,7 @@ app.get("/api/station/:ortExtId/departures", async (req, res) => {
         const datum = req.query.datum
         const zeit = req.query.zeit
         const response = await axios.get(
-            `https://www.bahn.de/web/api/reiseloesung/abfahrten?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}`,
+            `https://www.bahn.de/web/api/reiseloesung/abfahrten?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}&mitVias=true&maxVias=8`,
         );
         res.json(response.data);
     } catch (error) {
@@ -46,11 +46,12 @@ app.get("/api/station/:ortExtId/departures", async (req, res) => {
 
 app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
     try {
+
         const ortExtId = req.params.ortExtId
         const datum = req.query.datum
         const zeit = req.query.zeit
         const response = await axios.get(
-            `https://www.bahn.de/web/api/reiseloesung/ankuenfte?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}`,
+            `https://www.bahn.de/web/api/reiseloesung/ankuenfte?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}&mitVias=true&maxVias=8`,
         );
         res.json(response.data);
     } catch (error) {
