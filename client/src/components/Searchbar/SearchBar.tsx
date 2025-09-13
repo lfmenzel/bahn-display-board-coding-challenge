@@ -41,13 +41,9 @@ export const SearchBar: FC = () => {
         />
       </div>
       {/*TODO Show Result of useStation*/}
-      <div className="text-foreground text-lg my-4">
-        {query && !selectedStation && (
-          <Button
-            variant="ghost"
-            onClick={() => dispatch(clearQuery())}
-            className="mb-4"
-          >
+      <div className="text-foreground text-lg mt-4">
+        {query && (
+          <Button variant="ghost" onClick={() => dispatch(clearQuery())}>
             Clear search
           </Button>
         )}
