@@ -7,6 +7,7 @@ import { setBreakpoint } from "@/redux/app";
 import { BreakpointChecker } from "@/components/App";
 
 import "@/css/index.css";
+import { StationPage } from "@/pages";
 
 export const App = () => {
   const {
@@ -38,7 +39,7 @@ export const App = () => {
         className="min-h-screen max-h-screen w-full overflow-y-auto overflow-x-hidden p-2 md:p-4"
         ref={layoutRef}
       >
-        <div className="text-foreground">Bahn Board</div>
+        <StationPage />
         <BreakpointChecker />
       </div>
     </main>
