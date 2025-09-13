@@ -2,7 +2,8 @@
   "translation": {
     "search": {
       "limit": "in",
-      "unit": "Min"
+      "unit": "Min",
+      "station.placeholder": "Station search"
     },
     "locale": "en-US",
     "appTitle": "Bahn Board",

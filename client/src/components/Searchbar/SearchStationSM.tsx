@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Switcher } from "@/components/App";
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { setLimit } from "@/redux/board.ts";
+import { Input } from "@/components/ui/input.tsx";
 
 export const SearchStationSM: FC = () => {
   const { t } = useTranslation();
@@ -13,13 +14,22 @@ export const SearchStationSM: FC = () => {
   const { limit } = useAppSelector((state) => state.board);
 
   return (
-    <Switcher
-      options={limits}
-      label={t("search.limit")}
-      unit={t("search.unit")}
-      selected={limit}
-      onChange={(time: string) => dispatch(setLimit(time))}
-      className="w-[4.5rem]"
-    />
+    <>
+      <Input
+        type="text"
+        className="bg-background shadow-md"
+        placeholder={t("search.station.placeholder")}
+        name="station"
+      />
+
+      <Switcher
+        options={limits}
+        label={t("search.limit")}
+        unit={t("search.unit")}
+        selected={limit}
+        onChange={(time: string) => dispatch(setLimit(time))}
+        className="w-[4.5rem]"
+      />
+    </>
   );
 };

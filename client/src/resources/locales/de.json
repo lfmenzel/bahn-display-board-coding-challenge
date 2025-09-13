@@ -2,7 +2,8 @@
   "translation": {
     "search": {
       "limit": "in",
-      "unit": "Min"
+      "unit": "Min",
+      "station.placeholder": "Bahnhof suchen"
     },
     "locale": "de-DE",
     "appTitle": "Bahn Board",
