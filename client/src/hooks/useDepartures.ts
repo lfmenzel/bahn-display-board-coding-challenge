@@ -25,6 +25,7 @@ export const useDepartures = () => {
             return filterDates(entry.zeit, entry.ezZeit, limit);
           },
         );
+        console.log("Departures: ", connections.length, " in: ", limit);
         setLoading(true);
         dispatch(setDepartures(connections));
         setLoading(false);

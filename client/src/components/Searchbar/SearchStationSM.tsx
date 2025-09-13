@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input.tsx";
 export const SearchStationSM: FC = () => {
   const { t } = useTranslation();
 
-  const limits: string[] = ["5", "15", "30", "60", "120"];
+  const limits: string[] = ["5", "15", "30", "45", "60"];
   const dispatch = useAppDispatch();
   const { query, limit } = useAppSelector((state) => state.board);
 

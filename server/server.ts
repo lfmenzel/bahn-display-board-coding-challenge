@@ -11,18 +11,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get("/api/station/test", async (req, res) => {
-    try {
-        res.json("OK");
-    } catch (error) {
-        res
-            .status(500)
-            .json({ error: "Failed to fetch data from the other backend" });
-
-        console.error("REST start failed with: ", req.query, req.params)
-    }
-});
-
 app.get("/api/station/autocomplete", async (req, res) => {
     try {
         const query = req.query.query
