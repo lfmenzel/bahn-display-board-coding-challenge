@@ -22,13 +22,16 @@ export const TrainSign: FC<TrainSignProps> = ({ type, train }) => {
     case "SBAHN":
       trainColor = "bg-green-700";
       break;
+    case "TRAM":
+      trainColor = "bg-yellow-500";
+      break;
     case "IR":
       trainColor = "bg-orange-400";
   }
   return (
     <div
       className={cn(
-        "text-sm font-semibold truncate rounded-sm px-1 text-background",
+        "text-sm font-semibold truncate rounded-sm px-1 text-background max-w-20",
         trainColor,
       )}
     >

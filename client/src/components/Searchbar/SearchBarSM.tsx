@@ -6,7 +6,7 @@ import { Switcher } from "@/components/App";
 import { setVehicleType } from "@/redux/board.ts";
 import { useAppDispatch, useAppSelector } from "@/redux";
 
-export const SearchBar: FC = () => {
+export const SearchBarSM: FC = () => {
   const dispatch = useAppDispatch();
   const { vehicleType } = useAppSelector((state) => state.board);
 

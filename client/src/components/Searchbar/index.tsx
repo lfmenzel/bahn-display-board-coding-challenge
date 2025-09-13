@@ -1,2 +1,2 @@
-export { SearchBar } from "./SearchBar.tsx";
+export { SearchBarSM } from "./SearchBarSM.tsx";
 export { SearchStationSM } from "./SearchStationSM.tsx";
