@@ -28,16 +28,20 @@ export const boardSlice = createSlice({
     queryStations: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
-    clearQuery: (state) => {
+    clearStations: (state) => {
       state.query = "";
       state.stations = [];
       state.selectedStation = undefined;
+    },
+    clearQuery: (state) => {
+      state.query = "";
     },
     setStations: (state, action: PayloadAction<Station[]>) => {
       state.stations = action.payload;
     },
     setSelectedStation: (state, action: PayloadAction<Station | undefined>) => {
       state.selectedStation = action.payload;
+      state.query = "";
     },
     setDepartures: (state, action: PayloadAction<Connection[]>) => {
       state.departures = action.payload;
@@ -51,6 +55,7 @@ export const boardSlice = createSlice({
 export const {
   setLimit,
   queryStations,
+  clearStations,
   clearQuery,
   setStations,
   setSelectedStation,

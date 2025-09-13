@@ -34,9 +34,9 @@ export const App = () => {
   }, [language, changeLanguage]);
 
   return (
-    <main className={cn("h-full text-center bg-background")}>
+    <main className={cn("h-full text-center bg-background overflow-hidden")}>
       <div
-        className="min-h-screen max-h-screen w-full overflow-y-auto overflow-x-hidden p-2 md:p-4"
+        className="min-h-screen max-h-screen w-full p-2 md:p-4"
         ref={layoutRef}
       >
         <StationPage />

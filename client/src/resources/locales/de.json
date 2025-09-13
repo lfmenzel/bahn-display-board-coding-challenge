@@ -3,7 +3,8 @@
     "search": {
       "limit": "in",
       "unit": "Min",
-      "station.placeholder": "Bahnhof suchen"
+      "station.placeholder": "Bahnhof suchen",
+      "station.emptyMessage": "Keinen Bahnhof gefunden! Bitte geben Sie einen Namen ein."
     },
     "stationPage": {
       "arrivals": {

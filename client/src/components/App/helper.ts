@@ -3,6 +3,8 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
 import { TFunction } from "i18next";
+import { Station } from "@/api/stations.ts";
+import { Option } from "@/components/Searchbar/SearchAndSelect.tsx";
 
 export const getCurrentBreakpoint = (): string => {
   const breakpointXXS: string | null =
@@ -138,4 +140,11 @@ export const filterDates = (
   const seconds: number = Number(limit) * 60 * 1000;
   const targetTimeDate = new Date(new Date().getTime() + seconds);
   return date1 <= targetTimeDate || date2 <= targetTimeDate;
+};
+
+export const setOptionsForStation = (station: Station): Option => {
+  return {
+    value: station.extId,
+    label: station.name,
+  };
 };

@@ -3,7 +3,8 @@
     "search": {
       "limit": "in",
       "unit": "Min",
-      "station.placeholder": "Station search"
+      "station.placeholder": "Station search",
+      "station.emptyMessage": "No Station found! Enter a name, please."
     },
     "stationPage": {
       "arrivals": {

@@ -23,8 +23,7 @@ app.get("/api/station/autocomplete", async (req, res) => {
         res
         .status(500)
         .json({ error: "Failed to fetch data from the other backend" });
-
-        console.error("REST Autocomplete failed with: ", req.query, req.params)
+        // console.error("REST Autocomplete failed with: ", req.query, req.params)
     }
 });
 
@@ -41,8 +40,7 @@ app.get("/api/station/:ortExtId/departures", async (req, res) => {
         res
             .status(500)
             .json({error: "Failed to fetch data from the other backend"});
-
-        console.error("REST Departures failed with: ", req.query, req.params)
+        // console.error("REST Departures failed with: ", req.query, req.params)
     }
 });
 
@@ -59,8 +57,7 @@ app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
         res
             .status(500)
             .json({error: "Failed to fetch data from the other backend"});
-
-        console.error("REST Arrivals failed with: ", req.query, req.params)
+        // console.error("REST Arrivals failed with: ", req.query, req.params)
     }
 });
 
