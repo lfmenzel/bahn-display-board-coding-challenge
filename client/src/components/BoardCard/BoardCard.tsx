@@ -37,8 +37,8 @@ export const BoardCard: FC<BoardCardProps> = ({
 }) => {
   const timeColor: string = timeCurrent
     ? timePlanned != timeCurrent
-      ? "bg-semantic-error/5 border-semantic-error/15"
-      : "bg-semantic-success/2.5 border-semantic-success/12.5"
+      ? "bg-error/5 border-error/15"
+      : "bg-success/2.5 border-success/12.5"
     : "bg-muted-foreground/2.5 border-muted-foreground/25";
   return (
     <Card

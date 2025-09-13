@@ -13,9 +13,7 @@ export const Time: FC<TimeProps> = ({ timePlanned, timeCurrent }) => {
       <div
         className={cn(
           "text-lg font-semibold truncate",
-          timePlanned != timeCurrent
-            ? "text-semantic-error"
-            : "text-semantic-success",
+          timePlanned != timeCurrent ? "text-error" : "text-success",
         )}
       >
         {timeCurrent}

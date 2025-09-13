@@ -16,7 +16,7 @@ export const Messages: FC<MessagesProps> = ({ messages, important }) => {
           <div
             className={cn(
               "flex flex-row w-full",
-              important ? "text-semantic-error" : "text-muted-foreground",
+              important ? "text-error" : "text-muted-foreground",
             )}
             key={index}
           >
