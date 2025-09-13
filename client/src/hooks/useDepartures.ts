@@ -3,21 +3,24 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { fetchDepartures } from "@/api/connections.ts";
 import { setDepartures } from "@/redux/board.ts";
+import { formatTechnicalDateTime } from "@/components/App/helper.ts";
+import { useTranslation } from "react-i18next";
 
 export const useDepartures = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const station = useAppSelector((state) => state.board.selectedStation);
 
   useEffect(() => {
     if (station != null) {
-      fetchDepartures(station.extId, "2025-09-13", "10:10:58").then(
-        ({ data }) => {
-          setLoading(true);
-          dispatch(setDepartures(data.entries || []));
-          setLoading(false);
-        },
-      );
+      const { date, time } = formatTechnicalDateTime(new Date(), t);
+      fetchDepartures(station.extId, date, time).then(({ data }) => {
+        setLoading(true);
+        dispatch(setDepartures(data.entries || []));
+        setLoading(false);
+      });
     }
   }, [station]);
 

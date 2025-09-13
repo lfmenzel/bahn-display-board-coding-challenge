@@ -94,3 +94,36 @@ export const formatDate = (
   }
   return format(new Date(value), t(`format.${variant}`));
 };
+
+export const formatTechnicalDate = (
+  value: string,
+  t: TFunction<"translation", undefined>,
+) => {
+  if (!value) {
+    return "";
+  }
+  return format(new Date(value), t(`format.dateTechnical`));
+};
+
+export const formatTechnicalTime = (
+  value: string,
+  t: TFunction<"translation", undefined>,
+) => {
+  if (!value) {
+    return "";
+  }
+  return format(new Date(value), t(`format.timeTechnical`));
+};
+
+export const formatTechnicalDateTime = (
+  value: Date,
+  t: TFunction<"translation", undefined>,
+) => {
+  if (!value) {
+    return { date: "", time: "" };
+  }
+  const dateTime = value.toUTCString();
+  const date = formatTechnicalDate(dateTime, t);
+  const time = formatTechnicalTime(dateTime, t);
+  return { date: date, time: time };
+};

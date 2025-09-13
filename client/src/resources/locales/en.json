@@ -20,7 +20,9 @@
     "format": {
       "dateTime": "yyyy/MM/dd p",
       "date": "yyyy/MM/dd",
-      "time": "p"
+      "time": "p",
+      "dateTechnical": "yyyy-MM-dd",
+      "timeTechnical": "HH:mm:ss"
     }
   }
 }

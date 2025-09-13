@@ -43,8 +43,10 @@ app.get("/api/station/autocomplete", async (req, res) => {
 app.get("/api/station/:ortExtId/departures", async (req, res) => {
     try {
         const ortExtId = req.params.ortExtId
+        const datum = req.query.datum
+        const zeit = req.query.zeit
         const response = await axios.get(
-            `https://www.bahn.de/web/api/reiseloesung/abfahrten?datum=2025-09-13&zeit=10:21:23&ortExtId=${ortExtId}&ortId=A%3D1%40O%3DBerlin+Hbf%40X%3D13369549%40Y%3D52525589%40U%3D80%40L%3D8011160%40B%3D1%40p%3D1754512874%40i%3DU%C3%97008065969%40&mitVias=true&maxVias=8&verkehrsmittel[]=ICE&verkehrsmittel[]=EC_IC&verkehrsmittel[]=IR&verkehrsmittel[]=REGIONAL&verkehrsmittel[]=SBAHN&verkehrsmittel[]=BUS&verkehrsmittel[]=SCHIFF&verkehrsmittel[]=UBAHN&verkehrsmittel[]=TRAM&verkehrsmittel[]=ANRUFPFLICHTIG`,
+            `https://www.bahn.de/web/api/reiseloesung/abfahrten?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}`,
         );
         res.json(response.data);
     } catch (error) {
@@ -58,10 +60,11 @@ app.get("/api/station/:ortExtId/departures", async (req, res) => {
 
 app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
     try {
-
         const ortExtId = req.params.ortExtId
+        const datum = req.query.datum
+        const zeit = req.query.zeit
         const response = await axios.get(
-            `https://www.bahn.de/web/api/reiseloesung/ankuenfte?datum=2025-09-13&zeit=10:25:58&ortExtId=${ortExtId}&ortId=A%3D1%40O%3DDresden+Hbf%40X%3D13732039%40Y%3D51040562%40U%3D80%40L%3D8010085%40B%3D1%40p%3D1755118759%40i%3DU%C3%97008006050%40&mitVias=true&maxVias=8&verkehrsmittel[]=ICE&verkehrsmittel[]=EC_IC&verkehrsmittel[]=IR&verkehrsmittel[]=REGIONAL`,
+            `https://www.bahn.de/web/api/reiseloesung/ankuenfte?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}`,
         );
         res.json(response.data);
     } catch (error) {
