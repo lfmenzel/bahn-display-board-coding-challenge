@@ -4,6 +4,7 @@ import { Station } from "@/api/stations.ts";
 interface BoardState {
   limit: string;
   stations: Station[];
+  selectedStation?: Station;
   query?: string;
 }
 
@@ -22,12 +23,27 @@ export const boardSlice = createSlice({
     queryStations: (state, action: PayloadAction<string>) => {
       state.query = action.payload;
     },
+    clearQuery: (state) => {
+      console.log("clearQuery");
+      state.query = "";
+      state.stations = [];
+      state.selectedStation = undefined;
+    },
     setStations: (state, action: PayloadAction<Station[]>) => {
       state.stations = action.payload;
+    },
+    setSelectedStation: (state, action: PayloadAction<Station | undefined>) => {
+      state.selectedStation = action.payload;
     },
   },
 });
 
-export const { setLimit, queryStations, setStations } = boardSlice.actions;
+export const {
+  setLimit,
+  queryStations,
+  clearQuery,
+  setStations,
+  setSelectedStation,
+} = boardSlice.actions;
 
 export default boardSlice.reducer;

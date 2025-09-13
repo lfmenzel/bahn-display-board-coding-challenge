@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { fetchStations } from "@/api/stations.ts";
-import { setStations } from "@/redux/board.ts";
+import { setSelectedStation, setStations } from "@/redux/board.ts";
 
 export const useStations = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +18,7 @@ export const useStations = () => {
       });
     } else {
       dispatch(setStations([]));
+      dispatch(setSelectedStation(undefined));
     }
   }, [query, limit]);
 
