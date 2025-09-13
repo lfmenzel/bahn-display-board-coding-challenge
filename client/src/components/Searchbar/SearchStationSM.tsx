@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { Switcher } from "@/components/App";
 import { useAppDispatch, useAppSelector } from "@/redux";
-import { setLimit } from "@/redux/board.ts";
+import { queryStations, setLimit } from "@/redux/board.ts";
 import { Input } from "@/components/ui/input.tsx";
 
 export const SearchStationSM: FC = () => {
@@ -11,7 +11,11 @@ export const SearchStationSM: FC = () => {
 
   const limits: string[] = ["5", "15", "30", "60", "120"];
   const dispatch = useAppDispatch();
-  const { limit } = useAppSelector((state) => state.board);
+  const { query, limit } = useAppSelector((state) => state.board);
+
+  const handleStationChange = (e: { target: { value: string } }) => {
+    dispatch(queryStations(e.target.value));
+  };
 
   return (
     <>
@@ -19,7 +23,9 @@ export const SearchStationSM: FC = () => {
         type="text"
         className="bg-background shadow-md"
         placeholder={t("search.station.placeholder")}
+        value={query}
         name="station"
+        onChange={handleStationChange}
       />
 
       <Switcher

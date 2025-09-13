@@ -4,6 +4,13 @@ import cors from "cors";
 
 const app = express();
 
+const corsOptions = {
+    origin: "http://localhost:4200",
+    methods: "GET,POST",
+};
+
+app.use(cors(corsOptions));
+
 app.get("/api/station/test", async (req, res) => {
     try {
         res.json("OK");
