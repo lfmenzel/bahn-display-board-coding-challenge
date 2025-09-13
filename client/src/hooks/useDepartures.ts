@@ -14,24 +14,28 @@ export const useDepartures = () => {
 
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-  const { selectedStation, limit } = useAppSelector((state) => state.board);
+  const { selectedStation, limit, vehicleType } = useAppSelector(
+    (state) => state.board,
+  );
 
   useEffect(() => {
     if (selectedStation != null && selectedStation.extId != null) {
       const { date, time } = formatTechnicalDateTime(new Date(), t);
-      fetchDepartures(selectedStation.extId, date, time).then(({ data }) => {
-        const connections = (data.entries || []).filter(
-          (entry: { zeit: string; ezZeit: string }) => {
-            return filterDates(entry.zeit, entry.ezZeit, limit);
-          },
-        );
-        console.log("Departures: ", connections.length, " in: ", limit);
-        setLoading(true);
-        dispatch(setDepartures(connections));
-        setLoading(false);
-      });
+      fetchDepartures(selectedStation.extId, date, time, vehicleType).then(
+        ({ data }) => {
+          const connections = (data.entries || []).filter(
+            (entry: { zeit: string; ezZeit: string }) => {
+              return filterDates(entry.zeit, entry.ezZeit, limit);
+            },
+          );
+          // console.log("Departures: ", connections.length, " in: ", limit);
+          setLoading(true);
+          dispatch(setDepartures(connections));
+          setLoading(false);
+        },
+      );
     }
-  }, [selectedStation, limit]);
+  }, [selectedStation, limit, vehicleType]);
 
   return {
     loading,

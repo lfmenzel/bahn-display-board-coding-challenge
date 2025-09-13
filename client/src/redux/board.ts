@@ -9,6 +9,7 @@ interface BoardState {
   query?: string;
   departures: Connection[];
   arrivals: Connection[];
+  vehicleType: string;
 }
 
 const initialState: BoardState = {
@@ -16,6 +17,7 @@ const initialState: BoardState = {
   limit: "15",
   departures: [],
   arrivals: [],
+  vehicleType: "T",
 };
 
 export const boardSlice = createSlice({
@@ -49,6 +51,9 @@ export const boardSlice = createSlice({
     setArrivals: (state, action: PayloadAction<Connection[]>) => {
       state.arrivals = action.payload;
     },
+    setVehicleType: (state, action: PayloadAction<string>) => {
+      state.vehicleType = action.payload;
+    },
   },
 });
 
@@ -61,6 +66,7 @@ export const {
   setSelectedStation,
   setDepartures,
   setArrivals,
+  setVehicleType,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;
