@@ -1,10 +1,15 @@
 import { type FC } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Board } from "@/components/Board";
 import { useAppSelector } from "@/redux";
-import { BoardEvent } from "@/api/events.ts";
+import { BoardEvent, Meldung } from "@/api/events.ts";
+import { BoardCard } from "@/components/BoardCard";
+import { formatDate } from "@/components/App/helper.ts";
 
 export const BoardSM: FC = () => {
+  const { t } = useTranslation();
+
   const { selectedStation, departures, arrivals } = useAppSelector(
     (state) => state.board,
   );
@@ -23,9 +28,28 @@ export const BoardSM: FC = () => {
             children={
               departures
                 ? departures.map((departure: BoardEvent, index: number) => (
-                    <div className="text-foreground" key={index}>
-                      {departure.zeit}: {departure.terminus}
-                    </div>
+                    <BoardCard
+                      key={`departures-${index}`}
+                      journeyId={departure.journeyId}
+                      type={departure.verkehrmittel?.produktGattung || ""}
+                      trackPlanned={departure.gleis}
+                      trackCurrent={departure.ezGleis}
+                      train={departure.verkehrmittel?.name || ""}
+                      timePlanned={formatDate(departure.zeit, "time", t)}
+                      timeCurrent={formatDate(departure.ezZeit, "time", t)}
+                      target={departure.terminus}
+                      stops={departure.ueber}
+                      messages={[...departure.meldungen]
+                        .filter(
+                          (meldung: Meldung) => meldung.prioritaet != "HOCH",
+                        )
+                        .map((meldung: Meldung) => meldung.text)}
+                      messagesImportant={[...departure.meldungen]
+                        .filter(
+                          (meldung: Meldung) => meldung.prioritaet == "HOCH",
+                        )
+                        .map((meldung: Meldung) => meldung.text)}
+                    />
                   ))
                 : []
             }
@@ -36,9 +60,28 @@ export const BoardSM: FC = () => {
             children={
               arrivals
                 ? arrivals.map((arrival: BoardEvent, index: number) => (
-                    <div className="text-foreground" key={index}>
-                      {arrival.zeit}: {arrival.terminus}
-                    </div>
+                    <BoardCard
+                      key={`arrivals-${index}`}
+                      journeyId={arrival.journeyId}
+                      type={arrival.verkehrmittel?.produktGattung || ""}
+                      trackPlanned={arrival.gleis}
+                      trackCurrent={arrival.ezGleis}
+                      train={arrival.verkehrmittel?.name || ""}
+                      timePlanned={formatDate(arrival.zeit, "time", t)}
+                      timeCurrent={formatDate(arrival.ezZeit, "time", t)}
+                      target={arrival.terminus}
+                      stops={arrival.ueber}
+                      messages={[...arrival.meldungen]
+                        .filter(
+                          (meldung: Meldung) => meldung.prioritaet != "HOCH",
+                        )
+                        .map((meldung: Meldung) => meldung.text)}
+                      messagesImportant={[...arrival.meldungen]
+                        .filter(
+                          (meldung: Meldung) => meldung.prioritaet == "HOCH",
+                        )
+                        .map((meldung: Meldung) => meldung.text)}
+                    />
                   ))
                 : []
             }
