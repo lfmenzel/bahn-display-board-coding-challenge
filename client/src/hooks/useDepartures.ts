@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/redux";
-import { fetchDepartures } from "@/api/events.ts";
+import { fetchDepartures } from "@/api/connections.ts";
 import { setDepartures } from "@/redux/board.ts";
 
 export const useDepartures = () => {

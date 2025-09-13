@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Station } from "@/api/stations.ts";
-import { BoardEvent } from "@/api/events.ts";
+import { Connection } from "@/api/connections.ts";
 
 interface BoardState {
   limit: string;
   stations: Station[];
   selectedStation?: Station;
   query?: string;
-  departures: BoardEvent[];
-  arrivals: BoardEvent[];
+  departures: Connection[];
+  arrivals: Connection[];
 }
 
 const initialState: BoardState = {
@@ -40,10 +40,10 @@ export const boardSlice = createSlice({
     setSelectedStation: (state, action: PayloadAction<Station | undefined>) => {
       state.selectedStation = action.payload;
     },
-    setDepartures: (state, action: PayloadAction<BoardEvent[]>) => {
+    setDepartures: (state, action: PayloadAction<Connection[]>) => {
       state.departures = action.payload;
     },
-    setArrivals: (state, action: PayloadAction<BoardEvent[]>) => {
+    setArrivals: (state, action: PayloadAction<Connection[]>) => {
       state.arrivals = action.payload;
     },
   },

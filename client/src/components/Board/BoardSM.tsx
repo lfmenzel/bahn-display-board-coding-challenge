@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { Board } from "@/components/Board";
 import { useAppSelector } from "@/redux";
-import { BoardEvent, Meldung } from "@/api/events.ts";
+import { Connection, Meldung } from "@/api/connections.ts";
 import { BoardCard } from "@/components/BoardCard";
 import { formatDate } from "@/components/App/helper.ts";
 
@@ -27,7 +27,7 @@ export const BoardSM: FC = () => {
             label="departures"
             children={
               departures
-                ? departures.map((departure: BoardEvent, index: number) => (
+                ? departures.map((departure: Connection, index: number) => (
                     <BoardCard
                       key={`departures-${index}`}
                       journeyId={departure.journeyId}
@@ -59,7 +59,7 @@ export const BoardSM: FC = () => {
             label="arrivals"
             children={
               arrivals
-                ? arrivals.map((arrival: BoardEvent, index: number) => (
+                ? arrivals.map((arrival: Connection, index: number) => (
                     <BoardCard
                       key={`arrivals-${index}`}
                       journeyId={arrival.journeyId}

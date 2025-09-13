@@ -12,7 +12,7 @@ export interface Verkehrmittel {
   produktGattung: string;
 }
 
-export interface BoardEvent {
+export interface Connection {
   bahnhofsId: string;
   zeit: string;
   ezZeit: string;
