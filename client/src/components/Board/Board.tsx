@@ -14,7 +14,7 @@ export const Board: FC<BoardProps> = ({ label, children }) => {
   return (
     <Block
       header={`stationPage.${label}`}
-      className="min-w-[300px] bg-muted-foreground/5 border-1 border-accent -mb-3"
+      className="min-w-[200px] bg-muted-foreground/5 border-1 border-accent -mb-3"
     >
       {children ? (
         children
