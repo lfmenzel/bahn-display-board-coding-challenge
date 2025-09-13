@@ -36,7 +36,7 @@ export const BoardCard: FC<BoardCardProps> = ({
   messages,
 }) => {
   const timeColor: string = timeCurrent
-    ? timePlanned != timeCurrent
+    ? timePlanned != timeCurrent || trackPlanned != trackCurrent
       ? "bg-error/5 border-error/15"
       : "bg-success/2.5 border-success/12.5"
     : "bg-muted-foreground/2.5 border-muted-foreground/25";
