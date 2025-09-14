@@ -17,7 +17,7 @@ const initialState: BoardState = {
   limit: "15",
   departures: [],
   arrivals: [],
-  vehicleType: "T",
+  vehicleType: "Trains",
 };
 
 export const boardSlice = createSlice({

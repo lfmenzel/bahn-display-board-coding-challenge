@@ -27,6 +27,15 @@ export const TrainSign: FC<TrainSignProps> = ({ type, train }) => {
       break;
     case "IR":
       trainColor = "bg-orange-400";
+      break;
+    case "SCHIFF":
+      trainColor = "bg-teal-400";
+      break;
+    case "ANRUFPFLICHTIG":
+      trainColor = "bg-red-400";
+      break;
+    case "UBAHN":
+      trainColor = "bg-stone-400";
   }
   return (
     <div

@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const trainSignICE: Story = {
   args: {
     type: "ICE",
-    train: "ICE 1216",
+    train: "ICE 1652",
   },
 };
 
@@ -30,28 +30,28 @@ export const trainSignSBahn: Story = {
 export const trainSignTRAM: Story = {
   args: {
     type: "TRAM",
-    train: "4",
+    train: "STR 4",
   },
 };
 
 export const trainSignBus: Story = {
   args: {
     type: "BUS",
-    train: "68",
+    train: "Bus 68",
   },
 };
 
 export const trainSignREGIONAL: Story = {
   args: {
     type: "REGIONAL",
-    train: "RE 1524",
+    train: "RE 16507",
   },
 };
 
 export const trainSignECIC: Story = {
   args: {
     type: "EC_IC",
-    train: "EC 14",
+    train: "EC 459",
   },
 };
 
@@ -59,5 +59,26 @@ export const trainSignIR: Story = {
   args: {
     type: "IR",
     train: "IR 1724",
+  },
+};
+
+export const trainSignUBAHN: Story = {
+  args: {
+    type: "UBAHN",
+    train: "U 4",
+  },
+};
+
+export const trainSignSCHIFF: Story = {
+  args: {
+    type: "SCHIFF",
+    train: "Fäh 62",
+  },
+};
+
+export const trainSignANRUFPFLICHTIG: Story = {
+  args: {
+    type: "ANRUFPFLICHTIG",
+    train: "ANRUF",
   },
 };

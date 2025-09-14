@@ -10,7 +10,7 @@ export const SearchBarSM: FC = () => {
   const dispatch = useAppDispatch();
   const { vehicleType } = useAppSelector((state) => state.board);
 
-  const vehicles: string[] = ["T", "L", "A"];
+  const vehicles: string[] = ["Trains", "Local", "Ships", "All"];
   const [vehicle, setVehicle] = useState(vehicleType);
 
   return (
@@ -25,6 +25,7 @@ export const SearchBarSM: FC = () => {
             setVehicle(vehicleType);
             dispatch(setVehicleType(vehicleType));
           }}
+          className="w-15"
         />
 
         <div className="hidden xs:flex xs:hflex-row gap-1">
