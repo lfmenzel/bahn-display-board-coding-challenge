@@ -21,7 +21,9 @@ export const Track: FC<TrackProps> = ({ trackPlanned, trackCurrent }) => {
         {trackPlanned && (
           <TrainTrack className="min-w-3 max-w-3 mr-1 -rotate-45 z-0" />
         )}
-        {trackPlanned}
+        <div className="text-ellipsis overflow-clip line-clamp-1 max-w-18">
+          {trackPlanned}
+        </div>
       </div>
     </div>
   );
