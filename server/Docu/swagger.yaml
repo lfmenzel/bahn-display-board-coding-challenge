@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: SimpleServer
+  version: 1.0.0
+  description: ''
+servers:
+  - url: localhost
+paths:
+  /api/station/autocomplete:
+    parameters: []
+    get:
+      summary: SimpleStations
+      tags: []
+      parameters:
+        - name: query
+          in: query
+          required: false
+          example: Dresden
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          example: '30'
+          schema:
+            type: integer
+      responses:
+        '200':
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+              example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+              example: 'http://localhost:4200'
+            Vary:
+              schema:
+                type: string
+              example: Origin
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+              example: '7114'
+            ETag:
+              schema:
+                type: string
+              example: W/"1bca-KKxyjJRcujldH4ttu6GdFFo66NU"
+            Date:
+              schema:
+                type: string
+              example: 'Sun, 14 Sep 2025 21:29:55 GMT'
+            Connection:
+              schema:
+                type: string
+              example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+              example: timeout=5
+          description: SimpleStations
+  /api/station/8010085/departures:
+    parameters: []
+    get:
+      summary: SimpleDepartures
+      tags: []
+      parameters:
+        - name: datum
+          in: query
+          required: false
+          example: '2025-09-14'
+          schema:
+            type: integer
+        - name: zeit
+          in: query
+          required: false
+          example: '07:00:00'
+          schema:
+            type: integer
+      responses:
+        '200':
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+              example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+              example: 'http://localhost:4200'
+            Vary:
+              schema:
+                type: string
+              example: Origin
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+              example: '35511'
+            ETag:
+              schema:
+                type: string
+              example: W/"8ab7-xHathPGFo1orIczp3ygtxpMksOQ"
+            Date:
+              schema:
+                type: string
+              example: 'Sun, 14 Sep 2025 21:30:36 GMT'
+            Connection:
+              schema:
+                type: string
+              example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+              example: timeout=5
+          description: SimpleDepartures
+  /api/station/8010085/arrivals:
+    parameters: []
+    get:
+      summary: SimpleArrivals
+      tags: []
+      parameters:
+        - name: datum
+          in: query
+          required: false
+          example: '2025-09-14'
+          schema:
+            type: integer
+        - name: zeit
+          in: query
+          required: false
+          example: '07:00:00'
+          schema:
+            type: integer
+      responses:
+        '200':
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+              example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+              example: 'http://localhost:4200'
+            Vary:
+              schema:
+                type: string
+              example: Origin
+            Content-Type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+              example: '35061'
+            ETag:
+              schema:
+                type: string
+              example: W/"88f5-niF3/NZMUrbwmHF8e/Fnpz9y11s"
+            Date:
+              schema:
+                type: string
+              example: 'Sun, 14 Sep 2025 21:31:07 GMT'
+            Connection:
+              schema:
+                type: string
+              example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+              example: timeout=5
+          description: SimpleArrivals
