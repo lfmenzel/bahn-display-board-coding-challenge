@@ -14,6 +14,21 @@ Inclues Client and StoryBook.
 
 `cd client`
 
+## Structure of the App:
+- Top: Header
+  - Left: Search, Select and Clear Stations
+  - Right: Config
+    - Choose Time limit for connections (5min, **15min**, 30min, 45min, 60min) 
+    - Choose Vehicle type (**Trains**, Local, Ships, All)
+    - Choose Refresh Interval (none, **1min**, 5min, 15min)
+    - Choose Language (**de**, en)
+    - Choose Theme (**System**, Dark, Light)
+- Center: Board
+  - 2 Columns for normal and large devices: Departures, Arrivals
+  - 2 Rows for extreme small devices : Departures, Arrivals
+  - Full responsive from iPhone SE upwards
+- Bottom: Footer with element from top right for extreme small devices
+
 ## Stack:
 - vite
 - react
@@ -38,3 +53,5 @@ Inclues Client and StoryBook.
 - StoryBook Console Errors are not fixed yet
 
 `@2025 Lars F. Menzel`
+# **HAVE FUN!**
+
