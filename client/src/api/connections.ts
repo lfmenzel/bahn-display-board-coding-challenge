@@ -30,7 +30,7 @@ export interface Connection {
   terminus: string;
 }
 
-interface Result {
+export interface ResultConnection {
   data: {
     entries: Connection[];
   };
@@ -41,7 +41,7 @@ export const fetchDepartures = async (
   date: string,
   time: string,
   vehicleType: string,
-): Promise<Result> => {
+): Promise<ResultConnection> => {
   const params = {
     datum: date,
     zeit: time,
@@ -57,7 +57,7 @@ export const fetchArrivals = async (
   date: string,
   time: string,
   vehicleType: string,
-): Promise<Result> => {
+): Promise<ResultConnection> => {
   const params = {
     datum: date,
     zeit: time,

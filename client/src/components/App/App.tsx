@@ -8,6 +8,7 @@ import { BreakpointChecker } from "@/components/App";
 
 import "@/css/index.css";
 import { StationPage } from "@/pages";
+import { refreshConnections } from "@/redux/board.ts";
 
 export const App = () => {
   const {
@@ -32,6 +33,16 @@ export const App = () => {
       changeLanguage(language);
     }
   }, [language, changeLanguage]);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      dispatch(refreshConnections());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <main className={cn("h-full text-center bg-background overflow-hidden")}>

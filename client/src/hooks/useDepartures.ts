@@ -17,6 +17,7 @@ export const useDepartures = () => {
   const { selectedStation, limit, vehicleType } = useAppSelector(
     (state) => state.board,
   );
+  const { tick } = useAppSelector((state) => state.board);
 
   useEffect(() => {
     if (selectedStation != null && selectedStation.extId != null) {
@@ -36,7 +37,7 @@ export const useDepartures = () => {
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedStation, limit, vehicleType, t]);
+  }, [selectedStation, limit, vehicleType, t, tick]);
 
   return {
     loading,
