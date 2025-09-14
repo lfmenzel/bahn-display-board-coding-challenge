@@ -28,14 +28,14 @@ export const useArrivals = () => {
               return filterDates(entry.zeit, entry.ezZeit, limit);
             },
           );
-          // console.log("Arrivals: ", connections.length, " in: ", limit);
           setLoading(true);
           dispatch(setArrivals(connections));
           setLoading(false);
         },
       );
     }
-  }, [selectedStation, limit, vehicleType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedStation, limit, vehicleType, t]);
 
   return {
     loading,

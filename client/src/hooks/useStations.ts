@@ -19,6 +19,7 @@ export const useStations = () => {
     } else {
       dispatch(setStations([]));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return {

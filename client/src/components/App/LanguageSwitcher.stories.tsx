@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { LanguageSwitcher } from "@/components/App";
-import { fn } from "@storybook/test";
-import { useArgs } from "@storybook/preview-api";
+import { fn } from "storybook/test";
+import { useArgs } from "storybook/preview-api";
 import { LanguageSwitcherProps } from "@/components/App/LanguageSwitcher.tsx";
 
 import "@/css/index.css";

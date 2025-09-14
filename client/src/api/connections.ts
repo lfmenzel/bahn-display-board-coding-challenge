@@ -34,8 +34,8 @@ export const fetchDepartures = async (
   date: string,
   time: string,
   vehicleType: string,
-): Promise<any> => {
-  const params: any = {
+): Promise<never> => {
+  const params = {
     datum: date,
     zeit: time,
     vehicleType: vehicleType,
@@ -50,8 +50,8 @@ export const fetchArrivals = async (
   date: string,
   time: string,
   vehicleType: string,
-): Promise<any> => {
-  const params: any = {
+): Promise<never> => {
+  const params = {
     datum: date,
     zeit: time,
     vehicleType: vehicleType,

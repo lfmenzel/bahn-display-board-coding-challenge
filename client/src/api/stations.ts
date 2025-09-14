@@ -15,8 +15,8 @@ export interface Station {
 export const fetchStations = async (
   query?: string,
   limit?: string,
-): Promise<any> => {
-  const params: any = {
+): Promise<never> => {
+  const params = {
     query: query,
     limit: limit,
   };

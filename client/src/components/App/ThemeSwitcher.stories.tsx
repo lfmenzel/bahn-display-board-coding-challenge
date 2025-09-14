@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ThemeSwitcher } from "@/components/App";
-import { useArgs } from "@storybook/preview-api";
-import { fn } from "@storybook/test";
+import { useArgs } from "storybook/preview-api";
+import { fn } from "storybook/test";
 import { ThemeSwitcherProps } from "./ThemeSwitcher";
 
 import "@/css/index.css";
