@@ -15,20 +15,20 @@ type Story = StoryObj<typeof meta>;
 
 export const timeDelayed: Story = {
   args: {
-    timePlanned: "20:20",
-    timeCurrent: "20:50",
+    timePlanned: "2025-09-14T10:00:00",
+    timeCurrent: "2025-09-14T10:23:00",
   },
 };
 
 export const timeOnTime: Story = {
   args: {
-    timePlanned: "20:20",
-    timeCurrent: "20:20",
+    timePlanned: "2025-09-14T10:00:00",
+    timeCurrent: "2025-09-14T10:00:00",
   },
 };
 
-export const timeUnklear: Story = {
+export const timeUnclear: Story = {
   args: {
-    timePlanned: "20:20",
+    timePlanned: "2025-09-14T10:00:00",
   },
 };

@@ -34,5 +34,7 @@ Inclues Client and StoryBook.
 - There are probable more Vehicle Types
 - No Tests right now
 - Quality of Response is not always good, so deal with edge cases
+- i18n is not added to Storybook yet
+- StoryBook Console Errors are not fixed yet
 
 `@2025 Lars F. Menzel`

@@ -94,7 +94,11 @@ export const formatDate = (
   if (!value) {
     return "";
   }
-  return format(new Date(value), t(`format.${variant}`));
+  // TODO Add i18N to Storybook to avoid this
+  const formatString = t(`format.${variant}`);
+  return formatString == "format.time"
+    ? format(new Date(value), "HH:mm")
+    : format(new Date(value), formatString);
 };
 
 export const formatTechnicalDate = (
