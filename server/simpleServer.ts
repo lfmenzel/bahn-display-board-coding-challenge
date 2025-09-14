@@ -22,8 +22,8 @@ app.get("/api/station/autocomplete", async (req, res) => {
         res.json(response.data);
     } catch (error) {
         res
-        .status(500)
-        .json({ error: "Failed to fetch data from the other backend" });
+            .status(500)
+            .json({ error: "Failed to fetch data from the other backend" });
         // console.error("REST Autocomplete failed with: ", req.query, req.params)
     }
 });
