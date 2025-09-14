@@ -28,8 +28,8 @@ export const boardWithCard: Story = {
       <BoardCard
         key="1"
         journeyId="1"
-        timePlanned="09:30"
-        timeCurrent="09:30"
+        timePlanned="09:30:00"
+        timeCurrent="09:30:00"
         target="Dresden"
         train="ICE"
         type="ICE 1704"
@@ -41,8 +41,8 @@ export const boardWithCard: Story = {
       <BoardCard
         key="2"
         journeyId="2"
-        timePlanned="09:30"
-        timeCurrent="09:50"
+        timePlanned="09:30:00"
+        timeCurrent="09:50:00"
         target="Dresden"
         train="ICE"
         type="ICE 1704"

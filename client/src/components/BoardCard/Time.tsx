@@ -1,6 +1,7 @@
 import { type FC } from "react";
 
-import { cn } from "@/components/App/helper.ts";
+import { cn, differenceOfDates, formatDate } from "@/components/App/helper.ts";
+import { useTranslation } from "react-i18next";
 
 export interface TimeProps {
   timePlanned: string;
@@ -8,6 +9,13 @@ export interface TimeProps {
 }
 
 export const Time: FC<TimeProps> = ({ timePlanned, timeCurrent }) => {
+  const { t } = useTranslation();
+
+  const timeDifference =
+    timeCurrent &&
+    timePlanned != timeCurrent &&
+    `+${differenceOfDates(timePlanned, timeCurrent)}`;
+
   return (
     <>
       <div
@@ -16,9 +24,16 @@ export const Time: FC<TimeProps> = ({ timePlanned, timeCurrent }) => {
           timePlanned != timeCurrent ? "text-error" : "text-success",
         )}
       >
-        {timeCurrent}
+        {timeCurrent ? formatDate(timeCurrent, "time", t) : undefined}
       </div>
-      <div className="text-lg font-semibold truncate">{timePlanned}</div>
+      <div className="text-lg font-semibold truncate">
+        {formatDate(timePlanned, "time", t)}
+        {timeDifference && (
+          <div className="text-error text-xs -mt-1 mb-1">
+            {timeDifference} {t("search.unit")}
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -142,6 +142,12 @@ export const filterDates = (
   return date1 <= targetTimeDate || date2 <= targetTimeDate;
 };
 
+export const differenceOfDates = (datePlanned: string, dateCurrent: string) => {
+  const date1 = new Date(datePlanned).getTime();
+  const date2 = new Date(dateCurrent).getTime();
+  return (date2 - date1) / 1000 / 60;
+};
+
 export const setOptionsForStation = (station: Station): Option => {
   return {
     value: station.extId,

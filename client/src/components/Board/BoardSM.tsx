@@ -1,16 +1,12 @@
 import { type FC } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Board } from "@/components/Board";
 import { useAppSelector } from "@/redux";
 import { Connection, Meldung } from "@/api/connections.ts";
 import { BoardCard } from "@/components/BoardCard";
-import { formatDate } from "@/components/App/helper.ts";
 import { Footer } from "@/components/App";
 
 export const BoardSM: FC = () => {
-  const { t } = useTranslation();
-
   const { selectedStation, departures, arrivals } = useAppSelector(
     (state) => state.board,
   );
@@ -36,8 +32,8 @@ export const BoardSM: FC = () => {
                       trackPlanned={departure.gleis}
                       trackCurrent={departure.ezGleis}
                       train={departure.verkehrmittel?.name || ""}
-                      timePlanned={formatDate(departure.zeit, "time", t)}
-                      timeCurrent={formatDate(departure.ezZeit, "time", t)}
+                      timePlanned={departure.zeit}
+                      timeCurrent={departure.ezZeit}
                       target={departure.terminus}
                       stops={departure.ueber}
                       messages={[...departure.meldungen]
@@ -68,8 +64,8 @@ export const BoardSM: FC = () => {
                       trackPlanned={arrival.gleis}
                       trackCurrent={arrival.ezGleis}
                       train={arrival.verkehrmittel?.name || ""}
-                      timePlanned={formatDate(arrival.zeit, "time", t)}
-                      timeCurrent={formatDate(arrival.ezZeit, "time", t)}
+                      timePlanned={arrival.zeit}
+                      timeCurrent={arrival.ezZeit}
                       target={arrival.terminus}
                       stops={arrival.ueber}
                       messages={[...arrival.meldungen]
