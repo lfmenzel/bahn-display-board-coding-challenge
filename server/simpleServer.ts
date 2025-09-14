@@ -1,7 +1,7 @@
 import express from "express";
 import axios from "axios";
 import cors from "cors";
-import {prepareTrainTypes} from "./helper";
+import {filterDates, prepareTrainTypes} from "./helper";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -49,18 +49,30 @@ app.get("/api/station/autocomplete", async (req, res) => {
 app.get("/api/station/:ortExtId/departures", async (req, res) => {
     try {
         const ortExtId = req.params.ortExtId
-        const vehicleType = req.query.vehicleType || ""
         const datum = req.query.datum
         const zeit = req.query.zeit
+        const limit = req.query.limit || "15"
+        const vehicleType = prepareTrainTypes(String(req.query.vehicleType))
         if (!datum || !zeit) {
             res
                 .status(500)
                 .json({error: `Missing required query parameters: datum, zeit`});
         } else {
             const response = await axios.get(
-                `${targetServerURL}/web/api/reiseloesung/abfahrten?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}&mitVias=true&maxVias=8${prepareTrainTypes(vehicleType)}`,
+                `${targetServerURL}/web/api/reiseloesung/abfahrten?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}&mitVias=true&maxVias=8${vehicleType}`,
             );
-            res.json(response.data);
+
+            if (response.data?.entries?.length > 0) {
+                res.json({ entries: response.data.entries
+                    .filter(
+                        (entry: { zeit: string; ezZeit: string }) => {
+                            return filterDates(entry.zeit, entry.ezZeit, String(limit));
+                        },
+                    )
+                });
+            } else {
+                res.json({ entries: [] });
+            }
         }
     } catch (error) {
         res
@@ -72,9 +84,10 @@ app.get("/api/station/:ortExtId/departures", async (req, res) => {
 app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
     try {
         const ortExtId = req.params.ortExtId
-        const vehicleType = prepareTrainTypes(req.query.vehicleType)
         const datum = req.query.datum
         const zeit = req.query.zeit
+        const limit = req.query.limit || "15"
+        const vehicleType = prepareTrainTypes(String(req.query.vehicleType))
         if (!datum || !zeit) {
             res
                 .status(500)
@@ -83,7 +96,17 @@ app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
             const response = await axios.get(
                 `${targetServerURL}/web/api/reiseloesung/ankuenfte?datum=${datum}&zeit=${zeit}&ortExtId=${ortExtId}&mitVias=true&maxVias=8${vehicleType}`,
             );
-            res.json(response.data);
+            if (response.data?.entries?.length > 0) {
+                res.json({ entries: response.data.entries
+                    .filter(
+                        (entry: { zeit: string; ezZeit: string }) => {
+                            return filterDates(entry.zeit, entry.ezZeit, String(limit));
+                        },
+                    )
+                });
+            } else {
+                res.json({ entries: [] });
+            }
         }
     } catch (error) {
         res

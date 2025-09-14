@@ -4,10 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { fetchArrivals } from "@/api/connections.ts";
 import { setArrivals } from "@/redux/board.ts";
-import {
-  filterDates,
-  formatTechnicalDateTime,
-} from "@/components/App/helper.ts";
+import { formatTechnicalDateTime } from "@/components/App/helper.ts";
 
 export const useArrivals = () => {
   const { t } = useTranslation();
@@ -22,16 +19,10 @@ export const useArrivals = () => {
   useEffect(() => {
     if (selectedStation != null && selectedStation.extId != null) {
       const { date, time } = formatTechnicalDateTime(new Date(), t);
-      fetchArrivals(selectedStation.extId, date, time, vehicleType).then(
+      fetchArrivals(selectedStation.extId, date, time, limit, vehicleType).then(
         ({ data }) => {
-          const entries = data?.entries || [];
-          const connections = entries.filter(
-            (entry: { zeit: string; ezZeit: string }) => {
-              return filterDates(entry.zeit, entry.ezZeit, limit);
-            },
-          );
           setLoading(true);
-          dispatch(setArrivals(connections));
+          dispatch(setArrivals(data?.entries || []));
           setLoading(false);
         },
       );

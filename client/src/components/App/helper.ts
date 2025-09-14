@@ -134,18 +134,6 @@ export const formatTechnicalDateTime = (
   return { date: date, time: time };
 };
 
-export const filterDates = (
-  datePlanned: string,
-  dateCurrent: string,
-  limit: string,
-) => {
-  const date1 = new Date(datePlanned);
-  const date2 = new Date(dateCurrent);
-  const seconds: number = Number(limit) * 60 * 1000;
-  const targetTimeDate = new Date(new Date().getTime() + seconds);
-  return date1 <= targetTimeDate || date2 <= targetTimeDate;
-};
-
 export const differenceOfDates = (datePlanned: string, dateCurrent: string) => {
   const date1 = new Date(datePlanned).getTime();
   const date2 = new Date(dateCurrent).getTime();

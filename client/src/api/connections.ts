@@ -40,11 +40,13 @@ export const fetchDepartures = async (
   stationId: string,
   date: string,
   time: string,
+  limit: string,
   vehicleType: string,
 ): Promise<ResultConnection> => {
   const params = {
     datum: date,
     zeit: time,
+    limit: limit,
     vehicleType: vehicleType,
   };
   return axios.get(`${simpleServerURL}/api/station/${stationId}/departures`, {
@@ -56,11 +58,13 @@ export const fetchArrivals = async (
   stationId: string,
   date: string,
   time: string,
+  limit: string,
   vehicleType: string,
 ): Promise<ResultConnection> => {
   const params = {
     datum: date,
     zeit: time,
+    limit: limit,
     vehicleType: vehicleType,
   };
   return axios.get(`${simpleServerURL}/api/station/${stationId}/arrivals`, {
