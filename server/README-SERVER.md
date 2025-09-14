@@ -17,3 +17,6 @@ http://localhost:3000/api/station/8010085/arrivals?datum=2025-09-14&zeit=07:00:0
 
 # Full Project Infos
 [README.md](../README.md)
+
+`@2025 Lars F. Menzel`
+

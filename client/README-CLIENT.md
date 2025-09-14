@@ -20,3 +20,5 @@ http://localhost:6006/
 
 ## Full Project Infos
 [README.md](../README.md)
+
+`@2025 Lars F. Menzel`

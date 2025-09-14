@@ -16,7 +16,7 @@ export const Board: FC<BoardProps> = ({ label, children }) => {
       header={`stationPage.${label}`}
       className="min-w-[200px] bg-muted-foreground/5 border-1 border-accent -mb-3"
     >
-      {children ? (
+      {children && (Array.isArray(children) ? children?.length > 0 : true) ? (
         children
       ) : (
         <div className="text-muted-foreground">

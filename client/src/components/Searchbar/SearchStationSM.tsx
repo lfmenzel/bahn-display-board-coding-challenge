@@ -57,7 +57,7 @@ export const SearchStationSM: FC = () => {
           onSearch={(value) => dispatch(queryStations(value))}
           onClear={() => dispatch(clearStations())}
           value={selected}
-          debounceTime={300}
+          debounceTime={500}
         />
       )}
 
@@ -67,7 +67,7 @@ export const SearchStationSM: FC = () => {
         unit={t("search.unit")}
         selected={limit}
         onChange={(time: string) => dispatch(setLimit(time))}
-        className="w-[4.5rem]"
+        className="w-17"
       />
     </>
   );

@@ -1,4 +1,4 @@
-# Bahn Board
+# Coding Challenge Bahn Display Board
 
 ## Server:
 Inclues SimpleServer and Bahn-Vendo-Client-Server.
@@ -14,9 +14,25 @@ Inclues Client and StoryBook.
 
 `cd client`
 
+## Stack:
+- vite
+- react
+- typescript
+- redux/toolkit
+- shadcn
+- tailwindcss
+- lucide-react
+- storybook
+- axios
+- lodash-es
+- i18next
+- eslint
+
 # Known Issues:
 - There are Stations without extIds (atm I filter them out)
 - Search and Select is not perfect if Station is selected
 - There are probable more Vehicle Types
-- No Tests
-- Quality of Response is not always good
+- No Tests right now
+- Quality of Response is not always good, so deal with edge cases
+
+`@2025 Lars F. Menzel`
