@@ -20,7 +20,13 @@ export const fetchStations = async (
     query: query,
     limit: limit,
   };
-  return axios.get("http://localhost:3000/api/station/autocomplete", {
+
+  const simpleServerHOST =
+    import.meta.env.VITE_BAHN_SIMPLE_SERVER_HOST || "http://localhost";
+  const simpleServerPort = import.meta.env.VITE_BAHN_SIMPLE_SERVER_PORT || 3000;
+  const simpleServerURL = `${simpleServerHOST}:${simpleServerPort}`;
+
+  return axios.get(`${simpleServerURL}/api/station/autocomplete`, {
     params: params,
   });
 };

@@ -2,6 +2,11 @@ import { getAxios } from "./axios.ts";
 
 const axios = getAxios();
 
+const simpleServerHOST =
+  import.meta.env.VITE_BAHN_SIMPLE_SERVER_HOST || "http://localhost";
+const simpleServerPort = import.meta.env.VITE_BAHN_SIMPLE_SERVER_PORT || 3000;
+const simpleServerURL = `${simpleServerHOST}:${simpleServerPort}`;
+
 export interface Meldung {
   prioritaet: string;
   text: string;
@@ -35,12 +40,9 @@ export const fetchDepartures = async (
     zeit: time,
     vehicleType: vehicleType,
   };
-  return axios.get(
-    `http://localhost:3000/api/station/${stationId}/departures`,
-    {
-      params: params,
-    },
-  );
+  return axios.get(`${simpleServerURL}/api/station/${stationId}/departures`, {
+    params: params,
+  });
 };
 
 export const fetchArrivals = async (
@@ -54,7 +56,7 @@ export const fetchArrivals = async (
     zeit: time,
     vehicleType: vehicleType,
   };
-  return axios.get(`http://localhost:3000/api/station/${stationId}/arrivals`, {
+  return axios.get(`${simpleServerURL}/api/station/${stationId}/arrivals`, {
     params: params,
   });
 };

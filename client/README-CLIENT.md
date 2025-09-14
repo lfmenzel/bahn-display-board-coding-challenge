@@ -1,6 +1,11 @@
 # Client
 
 ## Install:
+### Make sure to use the same .env values as in the server!
+`Rename .env.local.template to .env.local and fill in the values.`
+
+`Change also Port in `[vite.config.ts](vite.config.ts)
+
 `npm install`
 
 ## Start Client:

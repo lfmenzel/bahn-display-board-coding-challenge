@@ -13,17 +13,6 @@ export default defineConfig({
   },
   server: {
     port: 4200,
-    proxy: {
-      // "^/orders/api/.*": {
-      //   target: "https://ontrack-q.redbull.com/api/webshop",
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/orders\/api/, ""),
-      // },
-      // "^/order/api/.*": {
-      //   target: "https://ontrack-q.redbull.com/api/webshop",
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/order\/api/, ""),
-      // },
-    },
+    proxy: {},
   },
 });
