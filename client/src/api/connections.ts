@@ -29,12 +29,19 @@ export interface Connection {
   verkehrmittel: Verkehrmittel;
   terminus: string;
 }
+
+interface Result {
+  data: {
+    entries: Connection[];
+  };
+}
+
 export const fetchDepartures = async (
   stationId: string,
   date: string,
   time: string,
   vehicleType: string,
-): Promise<never> => {
+): Promise<Result> => {
   const params = {
     datum: date,
     zeit: time,
@@ -50,7 +57,7 @@ export const fetchArrivals = async (
   date: string,
   time: string,
   vehicleType: string,
-): Promise<never> => {
+): Promise<Result> => {
   const params = {
     datum: date,
     zeit: time,

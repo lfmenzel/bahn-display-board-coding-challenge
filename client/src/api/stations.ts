@@ -1,4 +1,5 @@
 import { getAxios } from "./axios.ts";
+import { Connection } from "@/api/connections.ts";
 
 const axios = getAxios();
 
@@ -12,10 +13,16 @@ export interface Station {
   type: string;
 }
 
+interface Result {
+  data: {
+    entries: Connection[];
+  };
+}
+
 export const fetchStations = async (
   query?: string,
   limit?: string,
-): Promise<never> => {
+): Promise<Result> => {
   const params = {
     query: query,
     limit: limit,

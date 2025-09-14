@@ -23,7 +23,8 @@ export const useDepartures = () => {
       const { date, time } = formatTechnicalDateTime(new Date(), t);
       fetchDepartures(selectedStation.extId, date, time, vehicleType).then(
         ({ data }) => {
-          const connections = (data.entries || []).filter(
+          const entries = data?.entries || [];
+          const connections = entries.filter(
             (entry: { zeit: string; ezZeit: string }) => {
               return filterDates(entry.zeit, entry.ezZeit, limit);
             },
