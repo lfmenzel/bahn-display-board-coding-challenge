@@ -18,7 +18,6 @@ export interface Verkehrmittel {
 }
 
 export interface Connection {
-  bahnhofsId: string;
   zeit: string;
   ezZeit: string;
   gleis: string;

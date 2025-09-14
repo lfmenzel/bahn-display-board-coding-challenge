@@ -43,11 +43,12 @@ Inclues Client and StoryBook.
 - i18next
 - eslint
 
-# Known Issues:
+# Known Issues and TODOs:
+- Server with db-vendo-client is not finished. Experimental
 - There are Stations without extIds (atm I filter them out)
-- Search and Select is not perfect if Station is selected
+- Search and Select is not perfect after a Station is selected
 - There are probable more Vehicle Types
-- No Tests right now
+- No Tests right now, beside the Components in Storybook
 - Quality of Response is not always good, so deal with edge cases
 - i18n is not added to Storybook yet
 - StoryBook Console Errors are not fixed yet

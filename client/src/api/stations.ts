@@ -4,12 +4,9 @@ const axios = getAxios();
 
 export interface Station {
   extId: string;
-  id: string;
   lat: number;
   lon: number;
   name: string;
-  products: string[];
-  type: string;
 }
 
 export interface ResultStations {

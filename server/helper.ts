@@ -35,3 +35,32 @@ export const filterDates = (
     const targetTimeDate = new Date(new Date().getTime() + seconds);
     return date1 <= targetTimeDate || date2 <= targetTimeDate;
 };
+
+export const convertProduktGattung = (product: string): string => {
+    switch (product) {
+        case "nationalExpress":
+            return "ICE";
+        case "EC_IC":
+            return "EC_IC";
+        case "IR":
+            return "IR";
+        case "national":
+            return "EC_IC";
+        case "tram":
+            return "TRAM";
+        case "subway":
+            return "UBAHN";
+        case "suburban":
+            return "SBAHN";
+        case "bus":
+            return "REGIONAL";
+        case "schiff":
+            return "SCHIFF";
+        case "taxi":
+            return "TAXI";
+        case "anrufpflichtig":
+            return "ANRUFPFLICHTIG";
+        default:
+            return "NEW";
+    }
+}

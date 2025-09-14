@@ -5,13 +5,21 @@
 
 `npm install`
 
-## Start Server:
+## Start SimpleServer:
 `npm run server`
 
-## APIs
+## Endpoints with SimpleServer
 http://localhost:3000/api/station/autocomplete?query=Dresden&limit=30
 http://localhost:3000/api/station/8010085/departures?datum=2025-09-14&zeit=07:00:00
 http://localhost:3000/api/station/8010085/arrivals?datum=2025-09-14&zeit=07:00:00
+
+## Start VendoServer  (experimental)
+`npm run vendoServer`
+
+## Endpoints with VendoServer (experimental)
+http://localhost:3003/api/station/autocomplete
+http://localhost:3003/api/station/895177/departures?datum=2025-09-14&zeit=22%3A28%3A25
+http://localhost:3003/api/station/895177/arrivals?datum=2025-09-14&zeit=22%3A28%3A25
 
 # Full Project Infos
 [README.md](../README.md)

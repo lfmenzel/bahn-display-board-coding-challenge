@@ -115,4 +115,4 @@ app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
     }
 });
 
-app.listen(simpleServerPort, () => console.log(`Server is running on port ${simpleServerPort}\nTarget URL is ${targetServerURL}\nClient should run at ${clientURL}`));
+app.listen(simpleServerPort, () => console.log(`Simple Server is running on port ${simpleServerPort}\nTarget URL is ${targetServerURL}\nClient should run at ${clientURL}`));
