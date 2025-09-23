@@ -1,7 +1,8 @@
-import * as React from "react";
+import { ComponentProps } from "react";
+
 import { cn } from "@/components/App/helper.ts";
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+function Input({ className, type, ...props }: ComponentProps<"input">) {
   return (
     <input
       type={type}
