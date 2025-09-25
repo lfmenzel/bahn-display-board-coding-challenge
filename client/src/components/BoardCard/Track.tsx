@@ -13,7 +13,7 @@ export const Track: FC<TrackProps> = ({ trackPlanned, trackCurrent }) => {
     <div
       className={cn(
         "font-semibold truncate my-1 z-0",
-        trackCurrent && "text-error",
+        trackCurrent && "text-error animate-error",
       )}
     >
       <div className="flex flex-row items-center justify-center">

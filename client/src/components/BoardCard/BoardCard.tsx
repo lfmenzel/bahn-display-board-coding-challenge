@@ -44,7 +44,7 @@ export const BoardCard: FC<BoardCardProps> = ({
     <Card
       key={journeyId}
       className={cn(
-        "bg-card min-w-[250px] rounded-lg w-full mb-4 flex-row p-0",
+        "bg-card min-w-[250px] rounded-lg w-full mb-4 flex-row p-0 animate-appear",
         timeColor,
       )}
     >

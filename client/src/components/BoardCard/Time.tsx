@@ -21,7 +21,9 @@ export const Time: FC<TimeProps> = ({ timePlanned, timeCurrent }) => {
       <div
         className={cn(
           "text-lg font-semibold truncate",
-          timePlanned != timeCurrent ? "text-error" : "text-success",
+          timePlanned != timeCurrent
+            ? "text-error animate-error"
+            : "text-success",
         )}
       >
         {timeCurrent ? formatDate(timeCurrent, "time", t) : undefined}
@@ -29,7 +31,7 @@ export const Time: FC<TimeProps> = ({ timePlanned, timeCurrent }) => {
       <div className="text-lg font-semibold truncate">
         {formatDate(timePlanned, "time", t)}
         {timeDifference && (
-          <div className="text-error text-xs -mt-1 mb-1">
+          <div className="text-error text-xs -mt-1 mb-1 animate-error">
             {timeDifference} {t("search.unit")}
           </div>
         )}
