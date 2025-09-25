@@ -110,6 +110,7 @@ export const SearchAndSelect = memo(
     };
 
     const debouncedSearch = debounce((id) => onSearch?.(id), debounceTime, {
+      leading: true,
       trailing: true,
     });
 
@@ -133,6 +134,7 @@ export const SearchAndSelect = memo(
             onFocus={() => setOpen(true)}
             placeholder={placeholder}
             className="text-foreground outline-hidden w-full"
+            onClick={() => setInputValue(undefined)}
           />
           {inputValue && (
             <X

@@ -43,7 +43,7 @@ export const SearchStationSM: FC = () => {
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stations, selected]);
+  }, [stations, selected, options]);
 
   return (
     <>
