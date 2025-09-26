@@ -6,7 +6,8 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { body, validationResult } from "express-validator";
-
+import { Low } from 'lowdb'
+import { JSONFile } from 'lowdb/node'
 dotenv.config();
 
 const app = express();
@@ -21,17 +22,17 @@ const clientHOST = process.env.BAHN_CLIENT_HOST || "http://localhost";
 const clientPort = process.env.BAHN_CLIENT_PORT || 4200;
 const clientURL = `${clientHOST}:${clientPort}`;
 
-const secretKey = process.env.SECRET_KEY || "very_secret_key";
-const startPasswords =
-    process.env.START_PASSWORDS || ["very_secret_start_password"];
-const isLocal = process.env.IS_LOCAL || true;
+const secretKey = process.env.SECRET_KEY || "";
+const startPasswords = process.env.START_PASSWORDS || [""];
+const isLocal = process.env.IS_LOCAL || false;
 
 const corsOptions = {
     origin: clientURL,
     methods: "GET,POST",
 };
 
-let users = [];
+const usersDB = new Low(new JSONFile<[]>('users.json'), [])
+await usersDB.read()
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -69,21 +70,25 @@ app.post(
             return res.status(401).send("Invalid or missing Start Password");
         }
         const { username, password } = req.body;
-        //TODO just for testing, use a database
-        users = [];
         // TODO remove Start Password after using it
         const errors = validationResult(req);
         if (!errors.isEmpty())
             return res.status(400).json({ errors: errors.array() });
         const hashedPassword = await bcrypt.hash(password, 8);
+        let users = usersDB.data
+        users = users.filter(
+            (user) => user.username != username,
+        )
         users.push({ username, password: hashedPassword });
+        usersDB.data = users;
+        await usersDB.write()
         res.status(201).send("User created");
     },
 );
 
 app.post("/api/login", async (req, res) => {
     const { username, password } = req.body;
-    const user = users.find((user) => user.username === username);
+    const user = usersDB.data.find((user) => user.username === username);
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).send("Invalid credentials");
     }
