@@ -1,10 +1,22 @@
 {
   "translation": {
+    "user": {
+      "signup": "Registrieren",
+      "login": "Anmelden",
+      "hello": "Hallo",
+      "logout": "Abmelden"
+    },
     "search": {
       "limit": "in",
       "unit": "Min",
       "station.placeholder": "Bahnhof suchen",
       "station.emptyMessage": "Keinen Bahnhof gefunden! Bitte geben Sie einen Namen ein."
+    },
+    "startPage": {
+      "board": {
+        "server": "Ankünfte und Abfahrten (Authorisiert)",
+        "local": "Ankünfte und Abfahrten (nur lokal: unauthorisiert)"
+      }
     },
     "stationPage": {
       "arrivals": {

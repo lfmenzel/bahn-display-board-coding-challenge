@@ -16,15 +16,19 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import appReduceer from "./app";
 import boardReduceer from "./board";
+import userReduceer from "./user";
+import passwordReduceer from "./password";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
   app: appReduceer,
   board: boardReduceer,
+  user: userReduceer,
+  password: passwordReduceer,
 });
 
-const whitelist: string[] = ["app", "board"];
+const whitelist: string[] = ["app", "board", "user", "password"]; //TODO dont show password in redux
 
 const persistConfig: PersistConfig<ReturnType<typeof rootReducer>> = {
   key: "bahn",

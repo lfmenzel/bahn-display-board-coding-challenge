@@ -15,6 +15,7 @@ export const useDepartures = () => {
     (state) => state.board,
   );
   const { tick } = useAppSelector((state) => state.board);
+  const { token } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (selectedStation != null && selectedStation.extId != null) {
@@ -25,6 +26,7 @@ export const useDepartures = () => {
         time,
         limit,
         vehicleType,
+        token,
       ).then(({ data }) => {
         setLoading(true);
         dispatch(setDepartures(data?.entries || []));

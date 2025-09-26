@@ -1,10 +1,22 @@
 {
   "translation": {
+    "user": {
+      "signup": "Signup",
+      "login": "Login",
+      "hello": "Hello",
+      "logout": "Logout"
+    },
     "search": {
       "limit": "in",
       "unit": "Min",
       "station.placeholder": "Station search",
       "station.emptyMessage": "No Station found! Enter a name, please."
+    },
+    "startPage": {
+      "board": {
+        "server": "Arrivals and Departures (Authorized)",
+        "local": "Arrivals and Departures (only local: unauthorized)"
+      }
     },
     "stationPage": {
       "arrivals": {

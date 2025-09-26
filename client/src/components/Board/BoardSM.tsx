@@ -11,8 +11,9 @@ import { setOptionsForStation } from "@/components/App/helper.ts";
 import { setSelectedStation } from "@/redux/board.ts";
 
 export const BoardSM: FC = () => {
-  const { selectedStation, departures, arrivals, history, stations } =
-    useAppSelector((state) => state.board);
+  const { selectedStation, departures, arrivals, history } = useAppSelector(
+    (state) => state.board,
+  );
 
   const dispatch = useAppDispatch();
 
@@ -44,7 +45,7 @@ export const BoardSM: FC = () => {
         {history.length > 1 && (
           <SimpleSelect options={options} onValueChange={setSelected} />
         )}
-        <div className="text-foreground text-3xl mt-4 mb-0 p-2 bg-muted-foreground/5 border-1 border-accent">
+        <div className="text-foreground text-3xl mt-4 mb-0 p-2 bg-muted-foreground/5 border-1 border-accent animate-appear">
           {selectedStation.name}
         </div>
         <div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 w-full mt-4">

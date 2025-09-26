@@ -18,10 +18,11 @@ export interface ResultStations {
 export const fetchStations = async (
   query?: string,
   limit?: string,
+  token?: string,
 ): Promise<ResultStations> => {
   const params = {
-    query: query,
-    limit: limit,
+    query,
+    limit,
   };
 
   const simpleServerHOST =
@@ -29,7 +30,15 @@ export const fetchStations = async (
   const simpleServerPort = import.meta.env.VITE_BAHN_SIMPLE_SERVER_PORT || 3000;
   const simpleServerURL = `${simpleServerHOST}:${simpleServerPort}`;
 
+  let headers = {};
+  if (token) {
+    headers = {
+      Authorization: `token ${token}`,
+    };
+  }
+
   return axios.get(`${simpleServerURL}/api/station/autocomplete`, {
     params: params,
+    headers: headers,
   });
 };

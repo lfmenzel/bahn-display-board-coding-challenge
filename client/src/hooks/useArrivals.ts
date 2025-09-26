@@ -15,20 +15,26 @@ export const useArrivals = () => {
     (state) => state.board,
   );
   const { tick } = useAppSelector((state) => state.board);
+  const { token } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (selectedStation != null && selectedStation.extId != null) {
       const { date, time } = formatTechnicalDateTime(new Date(), t);
-      fetchArrivals(selectedStation.extId, date, time, limit, vehicleType).then(
-        ({ data }) => {
-          setLoading(true);
-          dispatch(setArrivals(data?.entries || []));
-          setLoading(false);
-        },
-      );
+      fetchArrivals(
+        selectedStation.extId,
+        date,
+        time,
+        limit,
+        vehicleType,
+        token,
+      ).then(({ data }) => {
+        setLoading(true);
+        dispatch(setArrivals(data?.entries || []));
+        setLoading(false);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedStation, limit, vehicleType, t, tick]);
+  }, [selectedStation, limit, vehicleType, t, tick, token]);
 
   return {
     loading,

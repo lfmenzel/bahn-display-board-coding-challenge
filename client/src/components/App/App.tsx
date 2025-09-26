@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { BrowserRouter, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { cn, useLayout } from "@/components/App/helper";
@@ -9,6 +10,8 @@ import { BreakpointChecker } from "@/components/App";
 import "@/css/index.css";
 import { StationPage } from "@/pages";
 import { refreshConnections } from "@/redux/board.ts";
+import { RouteComponent } from "@/components/App/Route.tsx";
+import { StartPage } from "@/pages/StartPage.tsx";
 
 export const App = () => {
   const {
@@ -50,8 +53,13 @@ export const App = () => {
         className="min-h-screen max-h-screen w-full p-2 md:p-4"
         ref={layoutRef}
       >
-        <StationPage />
-        <BreakpointChecker />
+        <BrowserRouter>
+          <Routes>
+            {RouteComponent("/", <StartPage />)}
+            {RouteComponent("/board", <StationPage />, false)}
+          </Routes>
+          <BreakpointChecker />
+        </BrowserRouter>
       </div>
     </main>
   );

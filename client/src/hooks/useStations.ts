@@ -8,10 +8,11 @@ export const useStations = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const { query } = useAppSelector((state) => state.board);
+  const { token } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (query != null && query != "") {
-      fetchStations(query, "25").then(({ data }) => {
+      fetchStations(query, "25", token).then(({ data }) => {
         setLoading(true);
         dispatch(setStations(data));
         setLoading(false);
@@ -20,7 +21,7 @@ export const useStations = () => {
       dispatch(setStations([]));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [query, token]);
 
   return {
     loading,

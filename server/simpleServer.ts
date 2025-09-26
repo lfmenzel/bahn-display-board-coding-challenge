@@ -3,6 +3,9 @@ import axios from "axios";
 import cors from "cors";
 import {filterDates, prepareTrainTypes} from "./helper";
 import dotenv from "dotenv";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { body, validationResult } from "express-validator";
 
 dotenv.config();
 
@@ -18,14 +21,79 @@ const clientHOST = process.env.BAHN_CLIENT_HOST || "http://localhost";
 const clientPort = process.env.BAHN_CLIENT_PORT || 4200;
 const clientURL = `${clientHOST}:${clientPort}`;
 
+const secretKey = process.env.SECRET_KEY || "very_secret_key";
+const startPasswords =
+    process.env.START_PASSWORDS || ["very_secret_start_password"];
+const isLocal = process.env.IS_LOCAL || true;
+
 const corsOptions = {
     origin: clientURL,
     methods: "GET,POST",
 };
 
-app.use(cors(corsOptions));
+let users = [];
 
-app.get("/api/station/autocomplete", async (req, res) => {
+app.use(cors(corsOptions));
+app.use(express.json());
+
+const authToken = (req, res, next) => {
+    if (!isLocal) {
+        const authHeader = req.headers["authorization"];
+        const token = authHeader && authHeader.split(" ")[1];
+        if (!token) return res.status(401).send("Token required");
+        jwt.verify(token, secretKey, (err, user) => {
+            if (err) return res.status(403).send("Invalid or expired token");
+            req.user = user;
+            next();
+        });
+    } else {
+        next();
+    }
+};
+
+app.post(
+    "/api/signup",
+    [
+        body("username")
+            .isLength({ min: 3 })
+            .withMessage("Enter a valid username at least 3 characters long"),
+        body("password")
+            .isLength({ min: 3 })
+            .withMessage("Password must be at least 3 characters long"),
+        body("startPassword")
+            .isLength({ min: 3 })
+            .withMessage("StartPassword must be at least 3 characters long"),
+    ],
+    async (req, res) => {
+        if (!req.body.startPassword || !startPasswords.includes(req.body.startPassword)) {
+            return res.status(401).send("Invalid or missing Start Password");
+        }
+        const { username, password } = req.body;
+        //TODO just for testing, use a database
+        users = [];
+        // TODO remove Start Password after using it
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+            return res.status(400).json({ errors: errors.array() });
+        const hashedPassword = await bcrypt.hash(password, 8);
+        users.push({ username, password: hashedPassword });
+        res.status(201).send("User created");
+    },
+);
+
+app.post("/api/login", async (req, res) => {
+    const { username, password } = req.body;
+    const user = users.find((user) => user.username === username);
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+        return res.status(401).send("Invalid credentials");
+    }
+    const token = jwt.sign({ userId: user.username }, secretKey, {
+        expiresIn: "1h",
+    });
+    res.status(200).send({ token });
+});
+
+app.get("/api/station/autocomplete", authToken, async (req, res) => {
     try {
         const query = req.query.query
         const limit = req.query.limit
@@ -46,7 +114,7 @@ app.get("/api/station/autocomplete", async (req, res) => {
     }
 });
 
-app.get("/api/station/:ortExtId/departures", async (req, res) => {
+app.get("/api/station/:ortExtId/departures", authToken, async (req, res) => {
     try {
         const ortExtId = req.params.ortExtId
         const datum = req.query.datum
@@ -81,7 +149,7 @@ app.get("/api/station/:ortExtId/departures", async (req, res) => {
     }
 });
 
-app.get(`/api/station/:ortExtId/arrivals`, async (req, res) => {
+app.get(`/api/station/:ortExtId/arrivals`, authToken, async (req, res) => {
     try {
         const ortExtId = req.params.ortExtId
         const datum = req.query.datum
