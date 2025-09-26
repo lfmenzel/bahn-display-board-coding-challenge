@@ -45,8 +45,6 @@ Inclues Client and StoryBook.
 
 # Known Issues and TODOs:
 - Server with db-vendo-client is not finished. Experimental
-- There are Stations without extIds (atm I filter them out)
-- Search and Select is not perfect after a Station is selected
 - There are probable more Vehicle Types
 - No Tests right now, beside the Components in Storybook
 - Quality of Response is not always good, so deal with edge cases

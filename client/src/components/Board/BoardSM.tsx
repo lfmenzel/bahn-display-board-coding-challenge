@@ -1,24 +1,52 @@
-import { type FC } from "react";
+import { type FC, useEffect, useState } from "react";
 
 import { Board } from "@/components/Board";
-import { useAppSelector } from "@/redux";
+import { useAppDispatch, useAppSelector } from "@/redux";
 import { Connection, Meldung } from "@/api/connections.ts";
 import { BoardCard } from "@/components/BoardCard";
 import { Footer } from "@/components/App";
+import { SimpleSelect } from "@/components/Searchbar/Select.tsx";
+import { Option } from "@/components/Searchbar/SearchAndSelect.tsx";
+import { setOptionsForStation } from "@/components/App/helper.ts";
+import { setSelectedStation } from "@/redux/board.ts";
 
 export const BoardSM: FC = () => {
-  const { selectedStation, departures, arrivals } = useAppSelector(
-    (state) => state.board,
+  const { selectedStation, departures, arrivals, history, stations } =
+    useAppSelector((state) => state.board);
+
+  const dispatch = useAppDispatch();
+
+  const [options, setOptions] = useState<Option[]>([]);
+  const [selected, setSelected] = useState<Option | undefined>(
+    selectedStation ? setOptionsForStation(selectedStation) : undefined,
   );
 
+  useEffect(() => {
+    if (history?.length > 0) {
+      setSelected(undefined);
+      setOptions(history.map((station) => setOptionsForStation(station)));
+    }
+  }, [history]);
+
+  useEffect(() => {
+    history.forEach((station) => {
+      if (station.extId == selected?.value) {
+        dispatch(setSelectedStation(station));
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected, history]);
+
   return (
-    selectedStation && (
+    selectedStation &&
+    history && (
       <div className="overflow-y-auto overflow-x-hidden min-h-screen max-h-screen pb-18">
-        {selectedStation && (
-          <div className="text-foreground text-3xl mt-4 mb-0 p-2 bg-muted-foreground/5 border-1 border-accent">
-            {selectedStation.name}
-          </div>
+        {history.length > 1 && (
+          <SimpleSelect options={options} onValueChange={setSelected} />
         )}
+        <div className="text-foreground text-3xl mt-4 mb-0 p-2 bg-muted-foreground/5 border-1 border-accent">
+          {selectedStation.name}
+        </div>
         <div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 w-full mt-4">
           <Board
             label="departures"

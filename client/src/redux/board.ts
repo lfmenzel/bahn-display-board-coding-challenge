@@ -8,6 +8,7 @@ interface BoardState {
   tick: number;
   nextRefreshAt?: string;
   stations: Station[];
+  history: Station[];
   selectedStation?: Station;
   query?: string;
   departures: Connection[];
@@ -17,6 +18,7 @@ interface BoardState {
 
 const initialState: BoardState = {
   stations: [],
+  history: [],
   refreshInterval: "1",
   tick: 0,
   limit: "15",
@@ -69,6 +71,22 @@ export const boardSlice = createSlice({
       state.selectedStation = action.payload;
       state.query = "";
     },
+    setHistory: (state, action: PayloadAction<Station | undefined>) => {
+      if (action.payload != undefined) {
+        if (state.history) {
+          state.history = [
+            action.payload,
+            ...state.history.filter(
+              (station: Station) => station.extId != action.payload?.extId,
+            ),
+          ];
+        } else {
+          state.history = [action.payload];
+        }
+      }
+      state.selectedStation = action.payload;
+      state.query = "";
+    },
     setDepartures: (state, action: PayloadAction<Connection[]>) => {
       state.departures = action.payload;
     },
@@ -85,6 +103,7 @@ export const {
   setLimit,
   setRefreshInterval,
   refreshConnections,
+  setHistory,
   queryStations,
   clearStations,
   clearQuery,

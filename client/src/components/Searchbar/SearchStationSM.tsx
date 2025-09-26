@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux";
 import {
   clearStations,
   queryStations,
+  setHistory,
   setLimit,
   setSelectedStation,
 } from "@/redux/board.ts";
@@ -21,7 +22,9 @@ export const SearchStationSM: FC = () => {
 
   const limits: string[] = ["5", "15", "30", "45", "60"];
   const dispatch = useAppDispatch();
-  const { limit, stations } = useAppSelector((state) => state.board);
+  const { limit, stations, selectedStation } = useAppSelector(
+    (state) => state.board,
+  );
 
   const [options, setOptions] = useState<Option[]>([]);
   const [selected, setSelected] = useState<Option | undefined>(undefined);
@@ -38,8 +41,12 @@ export const SearchStationSM: FC = () => {
 
   useEffect(() => {
     stations.forEach((station) => {
-      if (station.extId == selected?.value) {
+      if (
+        station.extId == selected?.value &&
+        station.extId != selectedStation?.extId
+      ) {
         dispatch(setSelectedStation(station));
+        dispatch(setHistory(station));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,9 +59,7 @@ export const SearchStationSM: FC = () => {
           options={options}
           emptyMessage={t("search.station.emptyMessage")}
           placeholder={t("search.station.placeholder")}
-          onValueChange={(selected) => {
-            setSelected(selected);
-          }}
+          onValueChange={setSelected}
           onSearch={(value) => dispatch(queryStations(value))}
           onClear={() => dispatch(clearStations())}
           value={selected}
