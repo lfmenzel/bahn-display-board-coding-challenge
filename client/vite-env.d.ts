@@ -2,9 +2,6 @@ interface ImportMetaEnv {
   readonly VITE_BAHN_SIMPLE_SERVER_HOST: string;
   readonly VITE_BAHN_SIMPLE_SERVER_PORT: string;
 
-  readonly VITE_BAHN_VENDO_SERVER_HOST: string;
-  readonly VITE_BAHN_VENDO_SERVER_PORT: string;
-
   readonly VITE_BAHN_CLIENT_HOST: string;
   readonly VITE_BAHN_CLIENT_PORT: string;
 

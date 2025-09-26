@@ -8,6 +8,12 @@
 ## Start SimpleServer:
 `npm run server`
 
+## Start Server dockerized:
+`colima start` (or another dockerized solution)
+
+`docker compose up --build`
+
+
 ## Endpoints with SimpleServer
 http://localhost:3000/api/station/autocomplete?query=Dresden&limit=30
 

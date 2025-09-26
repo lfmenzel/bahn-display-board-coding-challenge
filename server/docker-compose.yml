@@ -1,0 +1,10 @@
+services:
+  server:
+        container_name: server
+        image: server
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "${BAHN_SIMPLE_SERVER_PORT}:${BAHN_SIMPLE_SERVER_PORT}"
