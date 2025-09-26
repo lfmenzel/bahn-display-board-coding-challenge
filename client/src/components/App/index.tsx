@@ -1,6 +1,7 @@
-export { type SwitcherProps, Switcher } from "./Switcher.tsx";
-export { LanguageSwitcher } from "./LanguageSwitcher.tsx";
-export { ThemeSwitcher } from "./ThemeSwitcher.tsx";
-export { ThemeProvider } from "./ThemeProvider.tsx";
-export { Footer } from "./Footer.tsx";
-export { BreakpointChecker } from "./BreakpointChecker.tsx";
+export { type SwitcherProps, Switcher } from "./Switcher";
+export { LanguageSwitcher } from "./LanguageSwitcher";
+export { ThemeSwitcher } from "./ThemeSwitcher";
+export { ThemeProvider } from "./ThemeProvider";
+export { Footer } from "./Footer";
+export { BreakpointChecker } from "./BreakpointChecker";
+export { TextField } from "./TextField";

@@ -16,5 +16,12 @@ export const login = async (
     password,
   };
 
-  return axios.post(`${serverURL}/api/login`, data);
+  return axios
+    .post(`${serverURL}/api/login`, data)
+    .then((response) => {
+      return response;
+    })
+    .catch(() => {
+      return false;
+    });
 };

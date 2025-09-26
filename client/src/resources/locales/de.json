@@ -4,7 +4,17 @@
       "signup": "Registrieren",
       "login": "Anmelden",
       "hello": "Hallo",
-      "logout": "Abmelden"
+      "logout": "Abmelden",
+      "username": "Nutzername",
+      "password": "Passwort",
+      "startPassword": "Start-Passwort",
+      "error" : {
+        "usernameMissing": "Ein Nutzername ist Pflicht ",
+        "passwordMissing": "Ein Passwort ist Pflicht ",
+        "startPasswordMissing": "Ein Start-Passwort ist Pflicht",
+        "startPasswordWrong": "Das Start-Passwort ist falsch",
+        "usernamePasswordMismatch": "Nutzername passt nicht zum Passwort"
+      }
     },
     "search": {
       "limit": "in",

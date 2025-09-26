@@ -7,23 +7,34 @@ import { setPassword } from "@/redux/password.ts";
 export const useUser = () => {
   const dispatch = useAppDispatch();
 
-  const signupUser = (
+  const signupUser = async (
     username: string,
     password: string,
     startPassword: string,
-  ) => {
-    signup(username, password, startPassword).then((data) => {
+  ): Promise<boolean> => {
+    const result = signup(username, password, startPassword).then((data) => {
       if (data != false) {
         dispatch(setUsername(username));
         dispatch(setPassword(password));
+        return true;
       }
+      return false;
     });
+    return await result;
   };
 
-  const loginUser = (username: string, password: string) => {
-    login(username, password).then(({ data }) => {
-      dispatch(setToken(data.token));
+  const loginUser = async (
+    username: string,
+    password: string,
+  ): Promise<boolean> => {
+    const result = login(username, password).then((data) => {
+      if (data != false) {
+        dispatch(setToken(data.data.token));
+        return true;
+      }
+      return false;
     });
+    return await result;
   };
 
   const logoutUser = () => {

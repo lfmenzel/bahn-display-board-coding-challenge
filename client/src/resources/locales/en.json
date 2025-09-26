@@ -4,7 +4,17 @@
       "signup": "Signup",
       "login": "Login",
       "hello": "Hello",
-      "logout": "Logout"
+      "logout": "Logout",
+      "username": "Username",
+      "password": "Password",
+      "startPassword": "Start Password",
+      "error" : {
+        "usernameMissing": "A Username is required ",
+        "passwordMissing": "A Password is required ",
+        "startPasswordMissing": "A Start Password is required",
+        "startPasswordWrong": "The Start Password is not correct",
+        "usernamePasswordMismatch": "The username doesn't match the password"
+      }
     },
     "search": {
       "limit": "in",
