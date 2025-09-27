@@ -25,7 +25,8 @@
     "startPage": {
       "board": {
         "server": "Ankünfte und Abfahrten (Authorisiert)",
-        "local": "Ankünfte und Abfahrten (nur lokal: unauthorisiert)"
+        "local": "Ankünfte und Abfahrten (nur lokal: unauthorisiert)",
+        "statistics": "Statistiken"
       }
     },
     "stationPage": {
@@ -37,6 +38,16 @@
         "header": "Abfahrten",
         "empty": "Keine Abfahrten zu dieser Zeit"
       }
+    },
+    "statistics" : {
+      "username":  "Nutzername",
+      "creationDate":  "Erstellungsdatum",
+      "lastActiveDate":  "Zulezt aktiv",
+      "logins":  "Logins",
+      "loginErrors":  "Login Fehler",
+      "stationSearches":  "Stationssuchen",
+      "arrivalDisplays":  "Anzeige Ankünfte",
+      "departuresDisplays":  "Anzeige Abfahrten"
     },
     "locale": "de-DE",
     "appTitle": "Bahn Board",

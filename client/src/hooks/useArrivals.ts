@@ -15,7 +15,7 @@ export const useArrivals = () => {
     (state) => state.board,
   );
   const { tick } = useAppSelector((state) => state.board);
-  const { token } = useAppSelector((state) => state.user);
+  const { username, token } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (selectedStation != null && selectedStation.extId != null) {
@@ -26,6 +26,7 @@ export const useArrivals = () => {
         time,
         limit,
         vehicleType,
+        username,
         token,
       ).then(({ data }) => {
         setLoading(true);

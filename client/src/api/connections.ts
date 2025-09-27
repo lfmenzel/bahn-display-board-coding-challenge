@@ -41,6 +41,7 @@ export const fetchDepartures = async (
   time: string,
   limit: string,
   vehicleType: string,
+  username?: string,
   token?: string,
 ): Promise<ResultConnection> => {
   const params = {
@@ -48,6 +49,7 @@ export const fetchDepartures = async (
     zeit: time,
     limit: limit,
     vehicleType: vehicleType,
+    username,
   };
 
   let headers = {};
@@ -69,6 +71,7 @@ export const fetchArrivals = async (
   time: string,
   limit: string,
   vehicleType: string,
+  username?: string,
   token?: string,
 ): Promise<ResultConnection> => {
   const params = {
@@ -76,6 +79,7 @@ export const fetchArrivals = async (
     zeit: time,
     limit: limit,
     vehicleType: vehicleType,
+    username,
   };
 
   let headers = {};

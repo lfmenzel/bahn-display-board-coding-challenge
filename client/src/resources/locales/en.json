@@ -25,7 +25,8 @@
     "startPage": {
       "board": {
         "server": "Arrivals and Departures (Authorized)",
-        "local": "Arrivals and Departures (only local: unauthorized)"
+        "local": "Arrivals and Departures (only local: unauthorized)",
+        "statistics": "Statistics"
       }
     },
     "stationPage": {
@@ -37,6 +38,16 @@
         "header": "Departures",
         "empty": "No Departures at this time"
       }
+    },
+    "statistics" : {
+      "username":  "Username",
+      "creationDate":  "Creation Date",
+      "lastActiveDate":  "Last active Date",
+      "logins":  "Logins",
+      "loginErrors":  "Login Errors",
+      "stationSearches":  "Station Searches",
+      "arrivalDisplays":  "Arrival Displays",
+      "departuresDisplays":  "Departures Displays"
     },
     "locale": "en-US",
     "appTitle": "Bahn Board",

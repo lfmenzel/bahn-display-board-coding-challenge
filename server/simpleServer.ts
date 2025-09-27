@@ -52,6 +52,12 @@ const authToken = (req, res, next) => {
     }
 };
 
+app.use((req,res,next) =>{
+    // TODO logger middleware
+    // console.log(req.method,req.hostname, req.path, req.query);
+    next();
+});
+
 app.post(
     "/api/signup",
     [
@@ -79,7 +85,7 @@ app.post(
         users = users.filter(
             (user) => user.username != username,
         )
-        users.push({ username, password: hashedPassword });
+        users.push({ username, password: hashedPassword, statistics: {logins: 0, loginErrors: 0, stationSearches: 0, arrivalDisplays: 0, departuresDisplays: 0}, creationDate: new Date(), lastActiveDate: new Date() });
         usersDB.data = users;
         await usersDB.write()
         res.status(201).send("User created");
@@ -90,18 +96,30 @@ app.post("/api/login", async (req, res) => {
     const { username, password } = req.body;
     const user = usersDB.data.find((user) => user.username === username);
     if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).send("Invalid credentials");
+        res.status(401).send("Invalid credentials");
+        if (user) {
+            user.statistics.loginErrors += 1
+            user.lastActiveDate = new Date()
+            await usersDB.write()
+        }
+    } else {
+        const token = jwt.sign({ userId: user.username }, secretKey, {
+            expiresIn: "1h",
+        });
+        res.status(200).send({ token });
+        if (user) {
+            user.statistics.logins += 1
+            user.lastActiveDate = new Date()
+            await usersDB.write()
+        }
     }
-    const token = jwt.sign({ userId: user.username }, secretKey, {
-        expiresIn: "1h",
-    });
-    res.status(200).send({ token });
 });
 
 app.get("/api/station/autocomplete", authToken, async (req, res) => {
     try {
         const query = req.query.query
         const limit = req.query.limit
+        const username = req.query.username
         if (!query || !limit) {
             res
                 .status(500)
@@ -111,6 +129,13 @@ app.get("/api/station/autocomplete", authToken, async (req, res) => {
                 `${targetServerURL}/web/api/reiseloesung/orte?suchbegriff=${query}&typ=ALL&limit=${limit}`,
             );
             res.json(response.data);
+        }
+
+        const user = usersDB.data.find((user) => user.username === username);
+        if (user) {
+            user.statistics.stationSearches += 1
+            user.lastActiveDate = new Date()
+            await usersDB.write()
         }
     } catch (error) {
         res
@@ -126,6 +151,8 @@ app.get("/api/station/:ortExtId/departures", authToken, async (req, res) => {
         const zeit = req.query.zeit
         const limit = req.query.limit || "15"
         const vehicleType = prepareTrainTypes(String(req.query.vehicleType))
+        const username = req.query.username
+
         if (!datum || !zeit) {
             res
                 .status(500)
@@ -146,6 +173,13 @@ app.get("/api/station/:ortExtId/departures", authToken, async (req, res) => {
             } else {
                 res.json({ entries: [] });
             }
+
+            const user = usersDB.data.find((user) => user.username === username);
+            if (user) {
+                user.statistics.departuresDisplays += 1
+                user.lastActiveDate = new Date()
+                await usersDB.write()
+            }
         }
     } catch (error) {
         res
@@ -161,6 +195,7 @@ app.get(`/api/station/:ortExtId/arrivals`, authToken, async (req, res) => {
         const zeit = req.query.zeit
         const limit = req.query.limit || "15"
         const vehicleType = prepareTrainTypes(String(req.query.vehicleType))
+        const username = req.query.username
         if (!datum || !zeit) {
             res
                 .status(500)
@@ -181,6 +216,36 @@ app.get(`/api/station/:ortExtId/arrivals`, authToken, async (req, res) => {
                 res.json({ entries: [] });
             }
         }
+
+        const user = usersDB.data.find((user) => user.username === username);
+        if (user) {
+            user.statistics.arrivalDisplays += 1
+            user.lastActiveDate = new Date()
+            await usersDB.write()
+        }
+    } catch (error) {
+        res
+            .status(500)
+            .json({error: `Failed to fetch data from ${targetServerURL}`});
+    }
+});
+
+app.get(`/api/statistics`, authToken, async (req, res) => {
+    try {
+        const users = usersDB.data.map(async (user) => {
+            const userHash = await bcrypt.hash(user.username, 8)
+            return {
+                username: userHash,
+                creationDate: user.creationDate,
+                lastActiveDate: user.lastActiveDate,
+                logins: user.statistics.logins,
+                loginErrors: user.statistics.loginErrors,
+                stationSearches: user.statistics.stationSearches,
+                arrivalDisplays: user.statistics.arrivalDisplays,
+                departuresDisplays: user.statistics.departuresDisplays
+            }
+        })
+        res.json({ users: await Promise.all(users)});
     } catch (error) {
         res
             .status(500)

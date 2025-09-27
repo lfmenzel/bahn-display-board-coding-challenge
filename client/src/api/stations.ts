@@ -18,11 +18,13 @@ export interface ResultStations {
 export const fetchStations = async (
   query?: string,
   limit?: string,
+  username?: string,
   token?: string,
 ): Promise<ResultStations> => {
   const params = {
     query,
     limit,
+    username,
   };
 
   const simpleServerHOST =

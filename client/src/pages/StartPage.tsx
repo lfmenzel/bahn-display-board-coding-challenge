@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux";
 import { Button } from "@/components/ui/button.tsx";
 import { useUser } from "@/hooks/useUser.ts";
+import { StatisticsUser, useStatistics } from "@/hooks/useStatistics.ts";
 import { setUsername } from "@/redux/user.ts";
 import { setPassword } from "@/redux/password.ts";
 import {
@@ -14,6 +15,8 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs.tsx";
 import { TextField } from "@/components/App";
+import { TableComponent } from "@/components/App/TableComponent.tsx";
+import { formatDate } from "@/components/App/helper.ts";
 
 export const StartPage = () => {
   const { t } = useTranslation();
@@ -22,6 +25,7 @@ export const StartPage = () => {
   const navigate = useNavigate();
 
   const { signupUser, loginUser, logoutUser } = useUser();
+  const { statistics } = useStatistics();
   const { username, token } = useAppSelector((state) => state.user);
   const password = useAppSelector((state) => state.password.password);
   const isLocal = import.meta.env.VITE_IS_LOCAL || 3000;
@@ -32,6 +36,7 @@ export const StartPage = () => {
   const [startPasswordError, setStartPasswordError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [activeTab, setActiveTab] = useState("signup");
+  const [statisticsUsers, setsSatisticsUsers] = useState<StatisticsUser[]>([]);
 
   return (
     <div className="min-h-screen max-h-screen w-full overflow-y-auto overflow-x-hidden">
@@ -221,18 +226,71 @@ export const StartPage = () => {
         </TabsContent>
       </Tabs>
 
-      <div className="my-10">
-        <div className="h-[300px]" />
-        {isLocal && (
-          <Button
-            onClick={() => navigate("/board")}
-            className="max-w-100"
-            variant="secondary"
-          >
-            {t("startPage.board.local")}
-          </Button>
-        )}
-      </div>
+      <div className="h-[300px] my-10" />
+      {isLocal && (
+        <Button
+          onClick={() => navigate("/board")}
+          className="w-full"
+          variant="secondary"
+        >
+          {t("startPage.board.local")}
+        </Button>
+      )}
+
+      {isLocal && (
+        <Button
+          onClick={() =>
+            statistics().then((result) => {
+              if (typeof result != "boolean") {
+                setsSatisticsUsers(
+                  result.map((user: StatisticsUser) => {
+                    return {
+                      username: `${user.username.substring(0, 8)}...`,
+                      creationDate: formatDate(
+                        user.creationDate,
+                        "dateTime",
+                        t,
+                      ),
+                      lastActiveDate: formatDate(
+                        user.lastActiveDate,
+                        "dateTime",
+                        t,
+                      ),
+                      logins: user.logins,
+                      loginErrors: user.loginErrors,
+                      stationSearches: user.stationSearches,
+                      arrivalDisplays: user.arrivalDisplays,
+                      departuresDisplays: user.departuresDisplays,
+                    };
+                  }),
+                );
+                console.log(statisticsUsers);
+              }
+            })
+          }
+          className="my-4"
+          variant="secondary"
+        >
+          {t("startPage.board.statistics")}
+        </Button>
+      )}
+
+      {statisticsUsers && statisticsUsers.length > 0 && (
+        <TableComponent
+          headers={[
+            t("statistics.username"),
+            t("statistics.creationDate"),
+            t("statistics.lastActiveDate"),
+            t("statistics.logins"),
+            t("statistics.loginErrors"),
+            t("statistics.stationSearches"),
+            t("statistics.arrivalDisplays"),
+            t("statistics.departuresDisplays"),
+          ]}
+          rows={statisticsUsers}
+          className="border border-muted-foreground/50"
+        />
+      )}
     </div>
   );
 };
