@@ -139,7 +139,7 @@ app.get("/api/station/:ortExtId/departures", authToken, async (req, res) => {
                 res.json({ entries: response.data.entries
                     .filter(
                         (entry: { zeit: string; ezZeit: string }) => {
-                            return filterDates(entry.zeit, entry.ezZeit, String(limit));
+                            return filterDates(entry.zeit, entry.ezZeit, String(limit), String(datum), String(zeit));
                         },
                     )
                 });
@@ -173,7 +173,7 @@ app.get(`/api/station/:ortExtId/arrivals`, authToken, async (req, res) => {
                 res.json({ entries: response.data.entries
                     .filter(
                         (entry: { zeit: string; ezZeit: string }) => {
-                            return filterDates(entry.zeit, entry.ezZeit, String(limit));
+                            return filterDates(entry.zeit, entry.ezZeit, String(limit), String(datum), String(zeit));
                         },
                     )
                 });

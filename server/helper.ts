@@ -28,11 +28,14 @@ export const filterDates = (
     datePlanned: string,
     dateCurrent: string,
     limit: string,
+    date: string,
+    time: string,
 ) => {
+    const dateTime: Date = new Date(`${date} ${time}`);
     const date1 = new Date(datePlanned);
     const date2 = new Date(dateCurrent);
     const seconds: number = Number(limit) * 60 * 1000;
-    const targetTimeDate = new Date(new Date().getTime() + seconds);
+    const targetTimeDate = new Date(dateTime.getTime() + seconds);
     return date1 <= targetTimeDate || date2 <= targetTimeDate;
 };
 
